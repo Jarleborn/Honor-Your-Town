@@ -57,7 +57,7 @@ var mapHandler = {
        				// console.log("artist "  + artistname + "  " + artistname.indexOf("Kalmar"))
        				// console.log("låt "  + trackname + "  " + trackname.indexOf("Kalmar"))
 
-       				if(trackname.indexOf("Kalmar") > -1){
+       				if(trackname.indexOf(townName) > -1){
        					trackObject = { artistName:artistname, trackName:trackname, id:id, url:url}
        					bigArray.push(trackObject);
        				}
@@ -66,13 +66,50 @@ var mapHandler = {
        				//bigArray.push(array)
        			}
        			console.log(bigArray);
+       			mapHandler.loopout(bigArray)
        			//console.log(res["results"][0]["address_components"][3]["long_name"]);
 
       		}
     	}	
 	    //xhr.open("GET", "https://api.spotify.com/v1/search?q="+townName+"&type=track&limit=50", true);
-	    xhr.open("GET", 'https://api.spotify.com/v1/search?q=Kalmar&type=track&limit=50', true);
+	    xhr.open("GET", 'https://api.spotify.com/v1/search?q='+townName+'&type=track&limit=50', true);
 	    xhr.send();
+
+	    mapHandler.createPlaylist("test")
+	},
+
+	createPlaylist: function(townName){
+		xhr = new XMLHttpRequest();
+		//xhr2 = new XMLHttpRequest();
+		//console.log("hoj")
+		
+		xhr.onreadystatechange = function() {
+			var bigArray = []
+        	if (xhr.readyState == 4 && xhr.status == 200) {
+        		var res = JSON.parse(xhr.responseText)
+        		console.log(res);
+      		}
+    	}	
+	    //xhr.open("GET", "https://api.spotify.com/v1/search?q="+townName+"&type=track&limit=50", true);
+	   
+	    xhr.open("GET", 'http://localhost:1337/createplaylist', true);
+	 	 //xhr.setRequestHeader("Content-Type", "application/json" ,"Authorization" ,"Bearer", "BQDJUNwSr-Zui8lyc8KZZINHj828gyb2WmAKZ_XDTy9DdTt9FJ5IkziwXzhoyaRFXHMUfiiWWZtpCb1HO-db-rWepJ6FtMwtRPwJbtwCqhUCtNkFxgt6xVmywQbfeGpjIbfLk2Q9X__juaV1Hhf4W_mDdFTuVaZoeUzg9gn5ILh_wIeZeKNfrPMn27doY-Q4TwWkU1n0ueJtOG49bjYe4mKsa9rqAbBI1wxSWXao6LNQDRJ5GD_YEOVwJNw_ogQ72DOcNjHP6Zm5sjW6UfwZDspigEAQ9-y_p0AaguZTT5Awmr8" )
+	    xhr.send(
+				//JSON.stringify({"name":"test", "public":"true","Authorization":"AQActuIEDkF8yDZgysdxbJ_LvydYNtyJh_nIhx7Xrk5UFgmbopxDNutX6SCWBIWGB7HfD0j7Vppp3vWH5Me8LuWgOLwOhzTvFjZ0YUXvgvuN6qEZP5yGttoRRneGCaT2wCGSu_lqcmMA2or3k_Tw1LLcLbRYkSLiIZBdZyvT455MDM_XD6CzIc86cGL8HmGbnDZvTGsSleYuIE4YfdrWXYIFQ2jicKaeAhNif4dQ_AwS37-lMNG3N36leGs2VgDL6Vwf_dGejjgND_BO9IYEVLOUfj9Q1UZypLAIqQ" })
+			);
+	},
+
+	loopout: function(arrayOfSongs){
+		diven = document.getElementById("songs");
+		if(arrayOfSongs.length <= 0){
+			diven.textContent = "Tyvärr hittades inga låtar, vänlige se till att spendera din tid i en riktig stad"
+		}
+		console.log(diven)
+		for(var i = 0; i < arrayOfSongs.length; i++){
+			litag = document.createElement("li");
+			litag.textContent = arrayOfSongs[i].artistName + " - " + arrayOfSongs[i].trackName ;
+			diven.appendChild(litag) 
+		}
 	}
 
 
