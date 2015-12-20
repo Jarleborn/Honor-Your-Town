@@ -21,24 +21,20 @@ console.log("bajs")
   });
   
   app.get('/inloggad', function(req, res) {
-// The code that's returned as a query parameter to the redirect URI 
-//var code = 'MQCbtKe23z7YzzS44KzZzZgjQa621hgSzHN';
- 
-// Retrieve an access token and a refresh token 
-console.log(req.query.code)
-  spotifyApi.authorizationCodeGrant(req.query.code)
-  .then(function(data) {
-    console.log('The token expires in ' + data.body['expires_in']);
-    console.log('The access token is ' + data.body['access_token']);
-    console.log('The refresh token is ' + data.body['refresh_token']);
-    spotifyApi.setAccessToken(data.body['access_token']);
-    spotifyApi.setRefreshToken(data.body['refresh_token']);
-  }, function(err) {
-    console.log('Something went wrong!', err);
+    console.log(req.query.code)
+    spotifyApi.authorizationCodeGrant(req.query.code)
+    .then(function(data) {
+      console.log('The token expires in ' + data.body['expires_in']);
+      console.log('The access token is ' + data.body['access_token']);
+      console.log('The refresh token is ' + data.body['refresh_token']);
+      spotifyApi.setAccessToken(data.body['access_token']);
+      spotifyApi.setRefreshToken(data.body['refresh_token']);
+    }, function(err) {
+      console.log('Something went wrong!', err);
+    });
+      res.sendFile(__dirname + '/public/loggedin.html');
   });
-    res.sendFile(__dirname + '/public/loggedin.html');
-  });
-  
+   
   app.get('/login', function(req, res) {
 
 
@@ -51,19 +47,45 @@ console.log(req.query.code)
    });
 
   app.get('/createplaylist', function(req, res) {
-  spotifyApi.getMe()
-  .then(function(data) {
-
-    console.log('Some information about the authenticated user', data.body);
-    
-    spotifyApi.createPlaylist(data.body.id, 'My Cool ', { 'public' : false })
+    spotifyApi.getMe()
     .then(function(data) {
-    console.log('Created playlist!');
-    }, function(err) {
-    console.log('Something went wrong!', err);
-   })
+
+      console.log('Some information about the authenticated user', data.body);
+      
+      spotifyApi.createPlaylist(data.body.id, 'testerzz ', { 'public' : false })
+      .then(function(data) {
+      console.log('Created playlist!' + data.body.id);
+      res.send(data.body.id); 
+      }, function(err) {
+      console.log('Something went wrong!', err);
+     })
+    });
   });
-  });
+
+  app.post('/addTracksToPlayList', function(req, res) {
+    spotifyApi.getMe()
+    .then(function(data) {
+      var id = data.body.id;
+      // console.log('Some information about the authenticated user', data.body);
+      // console.log(JSON.parse(data.body))
+
+      console.log(req);
+
+      var bodyStr = '';
+    req.on("data",function(chunk){
+        bodyStr += chunk.toString();
+        var data = JSON.parse(bodyStr);
+        console.log("playslist ID" +data.plid)
+           spotifyApi.addTracksToPlaylist(id, data.plid, data.track)
+      .then(function(data) {
+        console.log('Added tracks to playlist!');
+      }, function(err) {
+        console.log('Something went wrong!', err);
+        });
+      });
+      });
+   
+    });
 
 app.listen(port, function() {
   console.log("Server up on "  + ipaddr+":" + port);
