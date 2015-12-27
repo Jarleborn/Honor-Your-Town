@@ -84,21 +84,12 @@ console.log("hoj " + data.name)
   app.post('/addTracksToPlayList', function(req, res) {
 
     console.log("hej")
-    // spotifyApi.getMe()
-    // .then(function(data) {
-    //   var id = data.body.id;
-    //   // console.log('Some information about the authenticated user', data.body);
-    //   console.log(JSON.parse(data.body))
-    //   console.log(data.body.id)
-      //console.log(req);
-
-      var bodyStr = '';
+    var bodyStr = '';
     req.on("data",function(chunk){
-      //console.log("chunk " + chunk)
         bodyStr += chunk.toString();
         var data = JSON.parse(bodyStr);
-        console.log(data.plid+ data.pit)
-           spotifyApi.addTracksToPlaylist(userID, data.plid, data.pit)
+        console.log("id: "+data.plid +"   låtar: "+ data.pit)
+      spotifyApi.addTracksToPlaylist(userID, data.plid, data.pit)
       .then(function(data) {
         console.log('Added tracks to playlist!');
       }, function(err) {

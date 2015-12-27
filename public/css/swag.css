@@ -1,0 +1,29 @@
+#map{
+	    width: 54%;
+    height: 17%;
+    margin-top: 10%;
+}
+
+/*nav{
+	background-color: yellow;
+}
+
+footer{
+	position: absolute;
+	bottom: 0px;
+}*/
+
+ body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+ footer.page-footer{
+  	position: absolute !important;
+  	bottom: 0px !important;
+  }

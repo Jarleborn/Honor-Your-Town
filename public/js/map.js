@@ -71,7 +71,7 @@ var mapHandler = {
        			}
        			console.log(mapHandler.bigArray);
        			mapHandler.loopout(mapHandler.bigArray)
-	   				 mapHandler.createPlaylist(townName)
+				mapHandler.createPlaylist(townName)
        			//console.log(res["results"][0]["address_components"][3]["long_name"]);
 
       		}
@@ -86,24 +86,25 @@ var mapHandler = {
 		xhr = new XMLHttpRequest();
 		//xhr2 = new XMLHttpRequest();
 		//console.log("hoj")
-		
+		songstrings = [];
 		xhr.onreadystatechange = function() {
-			
+			console.log(xhr.readyState)
         	if (xhr.readyState == 4 && xhr.status == 200) {
+        		
         		mapHandler.playlistid = xhr.responseText
         		console.log(mapHandler.playlistid);
-        		songstrings = [];
+        		
         		for (var i = 0; i < mapHandler.bigArray.length; i++) {
 
         			songstrings.push(mapHandler.bigArray[i].uri) 
         			
         		};
         		console.log(songstrings);
-        		
+        		 mapHandler.addTracksToplaylist(songstrings)
       		}
-      		
+      		 	
     	}	
-    	mapHandler.addTracksToplaylist(songstrings)
+  
 	    //xhr.open("GET", "https://api.spotify.com/v1/search?q="+townName+"&type=track&limit=50", true);
 	   
 	    xhr.open("POST", 'http://localhost:1337/createplaylist', true);
@@ -127,14 +128,11 @@ var mapHandler = {
         		console.log(v);
       		}
     	}	
-	    //xhr.open("GET", "https://api.spotify.com/v1/search?q="+townName+"&type=track&limit=50", true);
 	    var pit = song
 	   var kuk = JSON.stringify({"plid":mapHandler.playlistid, pit});
 	   console.log(kuk)
 	   console.log(JSON.parse(kuk))
-	   // console.log(JSON.parse(kuk.pit))
 	    xhr.open("POST", 'http://localhost:1337/addTracksToPlayList', true);
-	 	 //xhr.setRequestHeader("Content-Type", "application/json" ,"Authorization" ,"Bearer", "BQDJUNwSr-Zui8lyc8KZZINHj828gyb2WmAKZ_XDTy9DdTt9FJ5IkziwXzhoyaRFXHMUfiiWWZtpCb1HO-db-rWepJ6FtMwtRPwJbtwCqhUCtNkFxgt6xVmywQbfeGpjIbfLk2Q9X__juaV1Hhf4W_mDdFTuVaZoeUzg9gn5ILh_wIeZeKNfrPMn27doY-Q4TwWkU1n0ueJtOG49bjYe4mKsa9rqAbBI1wxSWXao6LNQDRJ5GD_YEOVwJNw_ogQ72DOcNjHP6Zm5sjW6UfwZDspigEAQ9-y_p0AaguZTT5Awmr8" )
 	    xhr.send(
 				kuk
 			);
