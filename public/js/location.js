@@ -38,19 +38,19 @@ var options = {
 function success(position) {
   //console.log(position);
   var cordinates = position.coords;
-  // console.log(cordinates.latitude)
-  // console.log(cordinates.longitude)
+  console.log(cordinates.latitude)
+  console.log(cordinates.longitude)
   // var userPosition ={latitude: cordinates.latitude, Longitude:cordinates.longitude};
   // console.log(userPosition);
   
-//nuvarande
-  	mapHandler.initMap(cordinates.latitude, cordinates.longitude);
+// //nuvarande
+//   	mapHandler.initMap(cordinates.latitude, cordinates.longitude);
    
   //lund
-   	//mapHandler.initMap(55.704660, 13.191007);
+   	// mapHandler.initMap(55.704660, 13.191007);
 
   // //malmö
-  //  	mapHandler.initMap(55.604981, 13.003822);
+   	mapHandler.initMap(55.604981, 13.003822);
 
    	// //Örebro
    	// mapHandler.initMap(55.934683, 13.539104);
@@ -62,7 +62,7 @@ function error(err) {
 
 function getPosition(){
 	navigator.geolocation.getCurrentPosition(success, error, options);
-	//console.log(success())
+	console.log(success())
 }
 
 //getPosition()

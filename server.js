@@ -1,4 +1,5 @@
 /* Load the HTTP library */
+var userID;
 var http = require("http");
 var SpotifyWebApi = require('spotify-web-api-node');
 var express = require("express")  , app = express()
@@ -21,7 +22,7 @@ console.log("bajs")
   });
   
   app.get('/inloggad', function(req, res) {
-    console.log(req.query.code)
+    //console.log(req.query.code)
     spotifyApi.authorizationCodeGrant(req.query.code)
     .then(function(data) {
       console.log('The token expires in ' + data.body['expires_in']);
@@ -46,44 +47,65 @@ console.log("bajs")
     '&redirect_uri=' + encodeURIComponent('http://localhost:1337/inloggad'));
    });
 
-  app.get('/createplaylist', function(req, res) {
+  app.post('/createplaylist', function(req, res) {
     spotifyApi.getMe()
     .then(function(data) {
 
-      console.log('Some information about the authenticated user', data.body);
-      
-      spotifyApi.createPlaylist(data.body.id, 'testerzz ', { 'public' : false })
+      //console.log('Some information about the authenticated user', data.body);
+      userID = data.body.id;
+      console.log(userID)
+
+
+
+      var bodyStr = '';
+      console.log("kör")
+    req.on("data",function(chunk){
+      console.log("chunk " + chunk)
+        bodyStr += chunk.toString();
+        var data = JSON.parse(bodyStr);
+        console.log(data.name)
+
+
+
+
+
+console.log("hoj " + data.name)
+      spotifyApi.createPlaylist(userID, data.name, { 'public' : true })
       .then(function(data) {
-      console.log('Created playlist!' + data.body.id);
+      //console.log('Created playlist!' + data.body.id);
       res.send(data.body.id); 
       }, function(err) {
       console.log('Something went wrong!', err);
      })
-    });
-  });
+      });      });
+      });
+
 
   app.post('/addTracksToPlayList', function(req, res) {
-    spotifyApi.getMe()
-    .then(function(data) {
-      var id = data.body.id;
-      // console.log('Some information about the authenticated user', data.body);
-      // console.log(JSON.parse(data.body))
 
-      console.log(req);
+    console.log("hej")
+    // spotifyApi.getMe()
+    // .then(function(data) {
+    //   var id = data.body.id;
+    //   // console.log('Some information about the authenticated user', data.body);
+    //   console.log(JSON.parse(data.body))
+    //   console.log(data.body.id)
+      //console.log(req);
 
       var bodyStr = '';
     req.on("data",function(chunk){
+      //console.log("chunk " + chunk)
         bodyStr += chunk.toString();
         var data = JSON.parse(bodyStr);
-        console.log("playslist ID" +data.plid)
-           spotifyApi.addTracksToPlaylist(id, data.plid, data.track)
+        console.log(data.plid+ data.pit)
+           spotifyApi.addTracksToPlaylist(userID, data.plid, data.pit)
       .then(function(data) {
         console.log('Added tracks to playlist!');
       }, function(err) {
         console.log('Something went wrong!', err);
         });
       });
-      });
+      // });
    
     });
 

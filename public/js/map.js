@@ -19,7 +19,8 @@ var mapHandler = {
 	initMap: function(lat, long) {
 	    map = new google.maps.Map(document.getElementById('map'), {
 	      center: {lat: lat, lng: long},
-	      zoom: 14
+	      //zoom: 14
+	      zoom: 10
 	    });
 	    console.log(map.addMarker)
 	    mapHandler.addMarker(lat, long);
@@ -70,7 +71,7 @@ var mapHandler = {
        			}
        			console.log(mapHandler.bigArray);
        			mapHandler.loopout(mapHandler.bigArray)
-	   				 mapHandler.createPlaylist("test")
+	   				 mapHandler.createPlaylist(townName)
        			//console.log(res["results"][0]["address_components"][3]["long_name"]);
 
       		}
@@ -91,18 +92,25 @@ var mapHandler = {
         	if (xhr.readyState == 4 && xhr.status == 200) {
         		mapHandler.playlistid = xhr.responseText
         		console.log(mapHandler.playlistid);
-
+        		songstrings = [];
         		for (var i = 0; i < mapHandler.bigArray.length; i++) {
-        			mapHandler.addTracksToplaylist(mapHandler.bigArray[i].uri)
+
+        			songstrings.push(mapHandler.bigArray[i].uri) 
+        			
         		};
+        		console.log(songstrings);
         		
       		}
+      		
     	}	
+    	mapHandler.addTracksToplaylist(songstrings)
 	    //xhr.open("GET", "https://api.spotify.com/v1/search?q="+townName+"&type=track&limit=50", true);
 	   
-	    xhr.open("GET", 'http://localhost:1337/createplaylist', true);
+	    xhr.open("POST", 'http://localhost:1337/createplaylist', true);
 	 	 //xhr.setRequestHeader("Content-Type", "application/json" ,"Authorization" ,"Bearer", "BQDJUNwSr-Zui8lyc8KZZINHj828gyb2WmAKZ_XDTy9DdTt9FJ5IkziwXzhoyaRFXHMUfiiWWZtpCb1HO-db-rWepJ6FtMwtRPwJbtwCqhUCtNkFxgt6xVmywQbfeGpjIbfLk2Q9X__juaV1Hhf4W_mDdFTuVaZoeUzg9gn5ILh_wIeZeKNfrPMn27doY-Q4TwWkU1n0ueJtOG49bjYe4mKsa9rqAbBI1wxSWXao6LNQDRJ5GD_YEOVwJNw_ogQ72DOcNjHP6Zm5sjW6UfwZDspigEAQ9-y_p0AaguZTT5Awmr8" )
 	    xhr.send(
+
+	    	JSON.stringify({"name":"Låtar om " + townName})
 				//JSON.stringify({"name":"test", "public":"true","Authorization":"AQActuIEDkF8yDZgysdxbJ_LvydYNtyJh_nIhx7Xrk5UFgmbopxDNutX6SCWBIWGB7HfD0j7Vppp3vWH5Me8LuWgOLwOhzTvFjZ0YUXvgvuN6qEZP5yGttoRRneGCaT2wCGSu_lqcmMA2or3k_Tw1LLcLbRYkSLiIZBdZyvT455MDM_XD6CzIc86cGL8HmGbnDZvTGsSleYuIE4YfdrWXYIFQ2jicKaeAhNif4dQ_AwS37-lMNG3N36leGs2VgDL6Vwf_dGejjgND_BO9IYEVLOUfj9Q1UZypLAIqQ" })
 			);
 	},
@@ -120,11 +128,15 @@ var mapHandler = {
       		}
     	}	
 	    //xhr.open("GET", "https://api.spotify.com/v1/search?q="+townName+"&type=track&limit=50", true);
-	   
+	    var pit = song
+	   var kuk = JSON.stringify({"plid":mapHandler.playlistid, pit});
+	   console.log(kuk)
+	   console.log(JSON.parse(kuk))
+	   // console.log(JSON.parse(kuk.pit))
 	    xhr.open("POST", 'http://localhost:1337/addTracksToPlayList', true);
 	 	 //xhr.setRequestHeader("Content-Type", "application/json" ,"Authorization" ,"Bearer", "BQDJUNwSr-Zui8lyc8KZZINHj828gyb2WmAKZ_XDTy9DdTt9FJ5IkziwXzhoyaRFXHMUfiiWWZtpCb1HO-db-rWepJ6FtMwtRPwJbtwCqhUCtNkFxgt6xVmywQbfeGpjIbfLk2Q9X__juaV1Hhf4W_mDdFTuVaZoeUzg9gn5ILh_wIeZeKNfrPMn27doY-Q4TwWkU1n0ueJtOG49bjYe4mKsa9rqAbBI1wxSWXao6LNQDRJ5GD_YEOVwJNw_ogQ72DOcNjHP6Zm5sjW6UfwZDspigEAQ9-y_p0AaguZTT5Awmr8" )
 	    xhr.send(
-				JSON.stringify({"plid":mapHandler.playlistid, "track":song})
+				kuk
 			);
 	},
 
