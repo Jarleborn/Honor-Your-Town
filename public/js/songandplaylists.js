@@ -70,7 +70,7 @@ playlistid: null,
         	if (xhr.readyState == 4 && xhr.status == 200) {
         		
         		songAndPlaylistHandler.playlistid = xhr.responseText
-        		console.log(songAndPlaylistHandler.playlistid);
+        		console.log("VAD STÅR DET HÄR????"+songAndPlaylistHandler.playlistid);
         		
         		for (var i = 0; i < songAndPlaylistHandler.bigArray.length; i++) {
 
@@ -85,7 +85,7 @@ playlistid: null,
   
 	    //xhr.open("GET", "https://api.spotify.com/v1/search?q="+townName+"&type=track&limit=50", true);
 	   
-	    xhr.open("POST", 'http://localhost:1337/createplaylist', true);
+	    xhr.open("POST", 'http://xn--dagsfrkaffe-vfb.nu:1337/createplaylist', true);
 	 	 //xhr.setRequestHeader("Content-Type", "application/json" ,"Authorization" ,"Bearer", "BQDJUNwSr-Zui8lyc8KZZINHj828gyb2WmAKZ_XDTy9DdTt9FJ5IkziwXzhoyaRFXHMUfiiWWZtpCb1HO-db-rWepJ6FtMwtRPwJbtwCqhUCtNkFxgt6xVmywQbfeGpjIbfLk2Q9X__juaV1Hhf4W_mDdFTuVaZoeUzg9gn5ILh_wIeZeKNfrPMn27doY-Q4TwWkU1n0ueJtOG49bjYe4mKsa9rqAbBI1wxSWXao6LNQDRJ5GD_YEOVwJNw_ogQ72DOcNjHP6Zm5sjW6UfwZDspigEAQ9-y_p0AaguZTT5Awmr8" )
 	    xhr.send(
 
@@ -103,14 +103,14 @@ playlistid: null,
 			
         	if (xhr.readyState == 4 && xhr.status == 200) {
         		v = xhr.responseText
-        		console.log(v);
+        		console.log("häääääääääääääär------------>        " +v);
       		}
     	}	
 	    var pit = song
 	   var kuk = JSON.stringify({"plid":songAndPlaylistHandler.playlistid, pit});
 	   console.log(kuk)
 	   console.log(JSON.parse(kuk))
-	    xhr.open("POST", 'http://localhost:1337/addTracksToPlayList', true);
+	    xhr.open("POST", 'http://xn--dagsfrkaffe-vfb.nu:1337/addTracksToPlayList', true);
 	    xhr.send(
 				kuk
 			);

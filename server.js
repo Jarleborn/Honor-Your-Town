@@ -9,7 +9,8 @@ var express = require("express")  , app = express()
 var credentials = {
   clientId : '8f30445301e641c99cee7af38d0212b5',
   clientSecret : '894d94073d1c4e1486249c86b54e8e09',
-  redirectUri : 'http://localhost:1337/inloggad'
+  //redirectUri : 'http://xn--dagsfrkaffe-vfb.nu:1337/'
+  redirectUri : 'http://xn--dagsfrkaffe-vfb.nu:1337/inloggad'
 };
  var spotifyApi = new SpotifyWebApi(credentials);
 //var spotifyApi = new SpotifyWebApi(credentials);
@@ -44,7 +45,8 @@ console.log("bajs")
     '?response_type=code' + '&show_dialog=true'+
     '&client_id=' + '8f30445301e641c99cee7af38d0212b5' +
     (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
-    '&redirect_uri=' + encodeURIComponent('http://localhost:1337/inloggad'));
+    '&redirect_uri=' + encodeURIComponent('http://xn--dagsfrkaffe-vfb.nu:1337/inloggad'));
+    //'&redirect_uri=' + encodeURIComponent('http://xn--dagsfrkaffe-vfb.nu:1337/inloggad'));
    });
 
   app.post('/createplaylist', function(req, res) {
@@ -63,7 +65,7 @@ console.log("bajs")
       console.log("chunk " + chunk)
         bodyStr += chunk.toString();
         var data = JSON.parse(bodyStr);
-        console.log(data.name)
+        console.log("namn" + data.name)
 
 
 
@@ -90,10 +92,13 @@ console.log("hoj " + data.name)
         var data = JSON.parse(bodyStr);
         console.log("id: "+data.plid +"   låtar: "+ data.pit)
       spotifyApi.addTracksToPlaylist(userID, data.plid, data.pit)
+
       .then(function(data) {
         console.log('Added tracks to playlist!');
+        res.send(userID)
       }, function(err) {
         console.log('Something went wrong!', err);
+        res.send(err)
         });
       });
       // });
