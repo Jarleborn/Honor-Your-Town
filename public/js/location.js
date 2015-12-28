@@ -50,10 +50,10 @@ function success(position) {
    	 //mapHandler.initMap(55.704660, 13.191007);
 
   // //malmö
-   	//mapHandler.initMap(55.604981, 13.003822);
+   	mapHandler.initMap(55.604981, 13.003822);
 
    	// //Örebro
-   	mapHandler.initMap(59.275263, 15.213411);
+   //	mapHandler.initMap(59.275263, 15.213411);
 };
 
 function error(err) {
@@ -64,6 +64,9 @@ function getPosition(){
 	navigator.geolocation.getCurrentPosition(success, error, options);
 	console.log(success())
 }
+
+window.onload = getPosition()
+
 
 //getPosition()
 
