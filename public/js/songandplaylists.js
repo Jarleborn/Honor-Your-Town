@@ -4,13 +4,13 @@ playlistid: null,
    townName: null,
    
 
-   // initButton: function(){
-   // 	console.log("lör")
-   // 	document.getElementById("savelink").addEventListener("click", function() {
-   // 		songAndPlaylistHandler.createPlaylist())
-   // 	} 
+   initButton: function(){
+   	console.log("lör")
+   	document.getElementById("savelink").addEventListener("click", function() {
+   		songAndPlaylistHandler.createPlaylist()
+   	});
 
-   // },
+   },
 	getSongs: function(){
 		xhr = new XMLHttpRequest();
 		//console.log("hoj")
@@ -22,12 +22,18 @@ playlistid: null,
         		console.log(res);
        			for(var i = 0; i < res["tracks"]["items"].length; i++){
        				var array = [];
+       				console.log("Detta är då detta som inte ska funka ---->  "+res["tracks"]["items"][i]["album"]["images"][0])
        				url = trackname = res["tracks"]["items"][i].preview_url
        				id = trackname = res["tracks"]["items"][i].id
        				trackname = res["tracks"]["items"][i].name
        				artistname = res["tracks"]["items"][i].artists[0].name
        				uri = res["tracks"]["items"][i].uri
+       				if(res["tracks"]["items"][i]["album"]["images"][0] != null || res["tracks"]["items"][i]["album"]["images"][0] != undefined){
        				img = res["tracks"]["items"][i]["album"]["images"][0].url;
+       				}
+       				else{
+       					img = null
+       				}
        				console.log("img   " + img)
        				// console.log("artist "  + artistname + "  " + artistname.indexOf("Kalmar"))
        				// console.log("låt "  + trackname + "  " + trackname.indexOf("Kalmar"))
@@ -111,6 +117,7 @@ playlistid: null,
 	},
 
 	loopout: function(arrayOfSongs){
+		songAndPlaylistHandler.setCardName()
 		songAndPlaylistHandler.getCoverArt()
 		console.log("kör")
 		diven = document.getElementById("songs");
@@ -132,7 +139,12 @@ playlistid: null,
 			document.getElementById(i).setAttribute("src",songAndPlaylistHandler.bigArray[i].img)
 		}
 		};
+	},
+
+	setCardName: function() {
+		document.getElementById("cTitle").textContent = "Heres The List Of All Spotify Tracks About "+songAndPlaylistHandler.townName+":"
 	}
+
 
 
 

@@ -28,6 +28,12 @@ footer{
   	position: absolute !important;
   	bottom: 0px !important;
   }*/
+footer.page-footer {
+    
+    position: fixed;
+    bottom: 0;
+    width: 100%;}
+
 
   #googlemaps { 
   height: 100%; 
