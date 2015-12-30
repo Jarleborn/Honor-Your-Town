@@ -2,6 +2,7 @@ var songAndPlaylistHandler = {
 playlistid: null,
    bigArray: [],
    townName: null,
+   urlToUserPlaylist: null,
    
 
    initButton: function(){
@@ -23,9 +24,10 @@ playlistid: null,
        			for(var i = 0; i < res["tracks"]["items"].length; i++){
        				var array = [];
        				console.log("Detta är då detta som inte ska funka ---->  "+res["tracks"]["items"][i]["album"]["images"][0])
-       				url = trackname = res["tracks"]["items"][i].preview_url
+       				preurl = trackname = res["tracks"]["items"][i].preview_url
        				id = trackname = res["tracks"]["items"][i].id
        				trackname = res["tracks"]["items"][i].name
+       				url = res["tracks"]["items"][i]["external_urls"].spotify
        				artistname = res["tracks"]["items"][i].artists[0].name
        				uri = res["tracks"]["items"][i].uri
        				if(res["tracks"]["items"][i]["album"]["images"][0] != null || res["tracks"]["items"][i]["album"]["images"][0] != undefined){
@@ -39,7 +41,7 @@ playlistid: null,
        				// console.log("låt "  + trackname + "  " + trackname.indexOf("Kalmar"))
 
        				if(trackname.indexOf(songAndPlaylistHandler.townName) > -1){
-       					trackObject = { artistName:artistname, trackName:trackname, id:id, url:url, uri:uri, img:img}
+       					trackObject = { artistName:artistname, trackName:trackname, id:id, preurl:preurl, uri:uri, img:img, url:url}
        					songAndPlaylistHandler.bigArray.push(trackObject);
        				}
        				//console.log(res["tracks"]["items"][i].name+ "  med   "+res["tracks"]["items"][i].artists[0].name );
@@ -68,8 +70,10 @@ playlistid: null,
 		xhr.onreadystatechange = function() {
 			console.log(xhr.readyState)
         	if (xhr.readyState == 4 && xhr.status == 200) {
-        		
-        		songAndPlaylistHandler.playlistid = xhr.responseText
+        		console.log(JSON.parse(xhr.responseText))
+        		linkAndId = JSON.parse(xhr.responseText)
+        		songAndPlaylistHandler.urlToUserPlaylist = linkAndId.link
+        		songAndPlaylistHandler.playlistid = linkAndId.id
         		console.log("VAD STÅR DET HÄR????"+songAndPlaylistHandler.playlistid);
         		
         		for (var i = 0; i < songAndPlaylistHandler.bigArray.length; i++) {
@@ -103,7 +107,11 @@ playlistid: null,
 			
         	if (xhr.readyState == 4 && xhr.status == 200) {
         		v = xhr.responseText
-        		console.log("häääääääääääääär------------>        " +v);
+        		console.log("häääääääääääääär------------>        " + JSON.parse(v))
+        		sLink = document.getElementById("savelink")
+        		sLink.textContent = "The Playslist Is Saved, Click Here To View It"
+        		sLink.setAttribute("href",songAndPlaylistHandler.urlToUserPlaylist)
+        		sLink.setAttribute("target","_blank")
       		}
     	}	
 	    var pit = song
@@ -128,8 +136,18 @@ playlistid: null,
 		console.log(diven)
 		for(var i = 0; i < arrayOfSongs.length; i++){
 			litag = document.createElement("li");
-			litag.textContent = arrayOfSongs[i].artistName + " - " + arrayOfSongs[i].trackName ;
+			
+			audioTag = document.createElement("audio");
+			audioTag.setAttribute("src",arrayOfSongs[i].preurl)
+			atag = document.createElement("a");
+			atag.setAttribute("href",arrayOfSongs[i].url)
+			atag.setAttribute("target","_blank")
+			atag.textContent = arrayOfSongs[i].artistName + " - " + arrayOfSongs[i].trackName ;
+			//audioTag.setAttribute("autoplay","false")
+			audioTag.setAttribute("controls","")
+			litag.appendChild(atag) 
 			diven.appendChild(litag) 
+			diven.appendChild(audioTag) 
 		}
 	},
 

@@ -75,7 +75,7 @@ console.log("hoj " + data.name)
       spotifyApi.createPlaylist(userID, data.name, { 'public' : true })
       .then(function(data) {
       //console.log('Created playlist!' + data.body.id);
-      res.send(data.body.id); 
+      res.send(JSON.stringify({"id":data.body.id, "link":data.body["external_urls"].spotify }))
       }, function(err) {
       console.log('Something went wrong!', err);
      })
@@ -95,7 +95,7 @@ console.log("hoj " + data.name)
 
       .then(function(data) {
         console.log('Added tracks to playlist!');
-        res.send(userID)
+        res.send(data.body)
       }, function(err) {
         console.log('Something went wrong!', err);
         res.send(err)
