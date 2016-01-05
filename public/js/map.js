@@ -15,15 +15,19 @@ var mapHandler = {
 	 })
 	},
 	
-	initMap: function(lat, long) {
+	initMap: function(lat, longitud) {
+		lat = parseFloat(lat)
+		longitud = parseFloat(longitud)
+		console.log(lat)
+		console.log("vad händer" + lat + "           " + longitud)
 	    map = new google.maps.Map(document.getElementById('map2'), {
-	      center: {lat: lat, lng: long},
+	      center: {lat: lat, lng: longitud},
 	      //zoom: 14
 	      zoom: 10
 	    });
 	    console.log(map.addMarker)
-	    mapHandler.addMarker(lat, long);
-		mapHandler.getTownName(lat, long);
+	    mapHandler.addMarker(lat, longitud);
+		mapHandler.getTownName(lat, longitud);
 		//backgroundHandler.initMap();
 	},
 

@@ -7,7 +7,11 @@ playlistid: null,
 
    initButton: function(){
    	console.log("lör")
-   	document.getElementById("savelink").addEventListener("click", function() {
+   	sLink = document.getElementById("savelink")
+		sLink.textContent = "Save The Playlist"
+		sLink.setAttribute("href","#")
+		sLink.removeAttribute('target')
+   	sLink.addEventListener("click", function() {
    		songAndPlaylistHandler.createPlaylist()
    	});
 
@@ -42,6 +46,7 @@ playlistid: null,
 
        				if(trackname.indexOf(songAndPlaylistHandler.townName) > -1){
        					trackObject = { artistName:artistname, trackName:trackname, id:id, preurl:preurl, uri:uri, img:img, url:url}
+       					console.log(trackObject.trackName)
        					songAndPlaylistHandler.bigArray.push(trackObject);
        				}
        				//console.log(res["tracks"]["items"][i].name+ "  med   "+res["tracks"]["items"][i].artists[0].name );
@@ -65,7 +70,7 @@ playlistid: null,
 		console.log("Gör Lista")
 		xhr = new XMLHttpRequest();
 		//xhr2 = new XMLHttpRequest();
-		//console.log("hoj")
+		console.log("The child is crying do sometihing about that")
 		songstrings = [];
 		xhr.onreadystatechange = function() {
 			console.log(xhr.readyState)
@@ -99,6 +104,7 @@ playlistid: null,
 	},
 
 	addTracksToplaylist: function(song){
+		
 		xhr = new XMLHttpRequest();
 		//xhr2 = new XMLHttpRequest();
 		console.log("hoj")
@@ -152,6 +158,7 @@ playlistid: null,
 		}
 
 		load.loadCheck()
+		
 	},
 
 	getCoverArt: function(){

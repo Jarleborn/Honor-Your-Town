@@ -44,12 +44,14 @@ var searchHandler = {
 
 	succesfulResponse: function(response) {
 		console.log("to the black bird")
-		console.log(response["results"][0]["geometry"]["location"].lat)
-		mapHandler.initMap(response["results"][0]["geometry"]["location"].lat, response["results"][0]["geometry"]["location"].log)
+		console.log(response["results"][0]["address_components"])
+		mapHandler.initMap(response["results"][0]["geometry"]["location"].lat, response["results"][0]["geometry"]["location"].lng)
 		//console.log(songAndPlaylistHandler.townName)
-		songAndPlaylistHandler.townName = response["results"][0]["address_components"][1]["long_name"];
+		songAndPlaylistHandler.townName = response["results"][0]["address_components"][0]["long_name"];
 		console.log(songAndPlaylistHandler.townName)
 		document.getElementById("songs").innerHTML = ""
+		songAndPlaylistHandler.bigArray = []
+		// songAndPlaylistHandler.initButton()
 		songAndPlaylistHandler.getSongs()
 	}
 
