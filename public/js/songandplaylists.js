@@ -23,7 +23,7 @@ playlistid: null,
         		console.log(res);
        			for(var i = 0; i < res["tracks"]["items"].length; i++){
        				var array = [];
-       				console.log("Detta är då detta som inte ska funka ---->  "+res["tracks"]["items"][i]["album"]["images"][0])
+       				// console.log("Detta är då detta som inte ska funka ---->  "+res["tracks"]["items"][i]["album"]["images"][0])
        				preurl = trackname = res["tracks"]["items"][i].preview_url
        				id = trackname = res["tracks"]["items"][i].id
        				trackname = res["tracks"]["items"][i].name
@@ -36,7 +36,7 @@ playlistid: null,
        				else{
        					img = null
        				}
-       				console.log("img   " + img)
+       				// console.log("img   " + img)
        				// console.log("artist "  + artistname + "  " + artistname.indexOf("Kalmar"))
        				// console.log("låt "  + trackname + "  " + trackname.indexOf("Kalmar"))
 
@@ -142,13 +142,16 @@ playlistid: null,
 			atag = document.createElement("a");
 			atag.setAttribute("href",arrayOfSongs[i].url)
 			atag.setAttribute("target","_blank")
+			atag.className = "collection-item";
 			atag.textContent = arrayOfSongs[i].artistName + " - " + arrayOfSongs[i].trackName ;
 			//audioTag.setAttribute("autoplay","false")
 			audioTag.setAttribute("controls","")
 			litag.appendChild(atag) 
-			diven.appendChild(litag) 
-			diven.appendChild(audioTag) 
+			diven.appendChild(atag) 
+			//diven.appendChild(audioTag) 
 		}
+
+		load.loadCheck()
 	},
 
 	getCoverArt: function(){

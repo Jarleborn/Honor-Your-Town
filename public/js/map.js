@@ -38,7 +38,7 @@ var mapHandler = {
        			res = JSON.parse(xhr.responseText);
        			console.log(res["results"][0]["address_components"][3]["long_name"]);
        			songAndPlaylistHandler.townName = res["results"][0]["address_components"][3]["long_name"];
-       			songAndPlaylistHandler.getSongs();
+       			songAndPlaylistHandler.getSongs(res["results"][0]["address_components"][3]["long_name"]);
       		}
     	}	
 	    xhr.open("GET", "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&key=AIzaSyC9frD5YpO4uLFqw6ca-vuMn_obtsgR_CQ", true);
@@ -46,6 +46,6 @@ var mapHandler = {
 	},
 
 	
-
+//https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyC9frD5YpO4uLFqw6ca-vuMn_obtsgR_CQ
 };
 

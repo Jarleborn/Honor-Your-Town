@@ -1,37 +1,69 @@
+ <link type="text/css" rel="stylesheet" href="css/swag.css"  media="screen,projection"/>
+
+<script type="text/javascript" src="js/load.js"></script>
+
 <div id="map2"></div>
 <div id="header"></div>
-
+<div  id="loading"> LAAAAAAAAAAAADDDDDDDDDDDDDDDAAAAAAAARRARRRRRRRRRRRRR</div>
 <!-- 
 //<input id="getSongs" type="button" value="Letta efter låtar om staden du är i" onClick="getPosition()"> -->
 <div class="row">
 
-<div class="center col s12 m12 l3">
-          <div class="card">
-           <!--  <div class="card-image"> -->
-              <div class="row">
-              	<img id="0" class="s3 m3 l3 left cimg"src="pics/1.jpeg">
-              	<img id="1" class="s3 m3 l3 cimg"src="pics/1.jpeg">
+<!-- <div class="center col s12 m12 l3"> -->
+            <div class="card center col s12 m12 l3">
+             <!--  <div class="card-image"> -->
+                <div class="row">
+                	<img id="0" class="s3 m3 l3 left cimg"src="pics/1.jpeg">
+                	<img id="1" class="s3 m3 l3 cimg"src="pics/1.jpeg">
+                </div>
+                <div class="row">
+                	<img id="2" class="  s3 m3 l3 left cimg"src="pics/1.jpeg">
+                	<img id="3" class="  s3 m3 l3 cimg"src="pics/1.jpeg">
+              <!--   </div> -->
+                <span id="cTitle" class="card-title">på gång</span>
               </div>
-              <div class="row">
-              	<img id="2" class="  s3 m3 l3 left cimg"src="pics/1.jpeg">
-              	<img id="3" class="  s3 m3 l3 cimg"src="pics/1.jpeg">
-            <!--   </div> -->
-              <span id="cTitle" class="card-title">på gång</span>
-            </div>
-            <div class="card-content">
-              <ul id="songs"></ul>
-              <ul id="songs"></ul>
-            </div>
-            <div class="card-action">
-              <a id="savelink" href="#">Save playlist</a>
-            </div>
-          
-<ul id="songs"></ul>
-<!-- <div id="map"></div> -->
-</div></div>
+              <div class="card-content">
+                <div  id="songs" class="collection"> 
+                  <!-- <ul id="songs"></ul>
+                  <ul id="songs"></ul> -->
+
+                </div>
+              </div>
+              <div class="card-action">
+                <a id="savelink" href="#">Save playlist</a>
+              </div>
+            
+  <ul id="songs"></ul>
+  <!-- <div id="map"></div> -->
+  </div>
+
+
+
+
+            <div class="card center col s12 m12 l5 offset-l2">
+                <span  class="card-title">Search For Antoher Town</span>
+             
+              <div class="card-content">
+                 <form class="col s11 m11 l11">
+        <div class="input-field">
+          <input id="search"  >
+         <!--  <label for="search"><i class="material-icons">search</i></label> -->
+        </div>
+      </form>
+      <a  id="searchButton" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">search</i></a>
+              </div>
+             
+ <!--         </div>   -->
+  <!-- <div id="map"></div> -->
+  </div>
+  </div>
+    
+
+
+
 
 <div id="footer"></div>
-    
+  
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
   <script> 
       $("#header").load("header.html"); 
@@ -40,9 +72,11 @@
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWz0N2Fxg7jXfCYu_1Y_0HuOyaU8EZA8I">
     </script>
+
+
 <script type="text/javascript" src="js/songandplaylists.js"></script>
 
 <script type="text/javascript" src="js/background.js"></script>
 <script type="text/javascript" src="js/map.js"></script>
-
+<script type="text/javascript" src="js/search.js"></script>
 <script type="text/javascript" src="js/location.js"></script>
