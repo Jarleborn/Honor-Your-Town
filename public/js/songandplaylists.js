@@ -8,9 +8,6 @@ playlistid: null,
    initButton: function(){
    	console.log("lör")
    	sLink = document.getElementById("savelink")
-		sLink.textContent = "Save The Playlist"
-		sLink.setAttribute("href","#")
-		sLink.removeAttribute('target')
    	sLink.addEventListener("click", function() {
    		songAndPlaylistHandler.createPlaylist()
    	});
@@ -55,7 +52,7 @@ playlistid: null,
        			}
        			console.log(songAndPlaylistHandler.bigArray);
        			songAndPlaylistHandler.loopout(songAndPlaylistHandler.bigArray)
-				songAndPlaylistHandler.initButton()
+				//songAndPlaylistHandler.initButton()
        			//console.log(res["results"][0]["address_components"][3]["long_name"]);
 
       		}
@@ -162,15 +159,25 @@ playlistid: null,
 	},
 
 	getCoverArt: function(){
+	
 		for (var i = 0; i < 4; i++) {
 			if(songAndPlaylistHandler.bigArray[i] != undefined || songAndPlaylistHandler.bigArray[i] != null ){
 			document.getElementById(i).setAttribute("src",songAndPlaylistHandler.bigArray[i].img)
+		}
+		else{
+			document.getElementById(i).setAttribute("src","../pics/1.png")
 		}
 		};
 	},
 
 	setCardName: function() {
 		document.getElementById("cTitle").textContent = "Heres The List Of All Spotify Tracks About "+songAndPlaylistHandler.townName+":"
+	}, 
+
+	emptyResponse: function() {
+		document.getElementById("songs").innerHTML = ""
+		songAndPlaylistHandler.bigArray = []
+		
 	}
 
 
@@ -183,3 +190,6 @@ playlistid: null,
 
 
 }
+
+
+window.onload = songAndPlaylistHandler.initButton()

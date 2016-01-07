@@ -105,6 +105,12 @@ console.log("hoj " + data.name)
    
     });
 
+  app.get('/fillimg', function(req, res) {
+    //console.log(req.query.code)
+   
+      res.sendFile(__dirname + '/pics/1.png');
+  });
+
 app.listen(port, function() {
   console.log("Server up on "  + ipaddr+":" + port);
 });

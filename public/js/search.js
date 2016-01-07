@@ -2,7 +2,7 @@ console.log("HOPPLA HOJ")
 
 var searchHandler = {
 
-	getUserInputedTownName: function () {
+	initSearch: function () {
 		console.log("To The Black Bird")
 		console.log(document.activeElement)
 
@@ -10,19 +10,16 @@ var searchHandler = {
 	      
 	        if(e.keyCode == 13 && !e.shiftKey){
 	            e.preventDefault();
-	            searchBox = document.getElementById('search') 
-		   		console.log(searchBox.value)
-		   		searchHandler.searchWithTownName(searchBox.value)
-		   		searchBox.value = ""
+	        	searchHandler.search()   
 	        }
 	    });
 			document.getElementById('searchButton').addEventListener("click", function() {
 				// console.log(document.activeElement)
-				searchBox = document.getElementById('search') 
-		   		console.log(searchBox.value)
-		   		searchHandler.searchWithTownName(searchBox.value)
-		   		searchBox.value = ""
-
+				// searchBox = document.getElementById('search') 
+		  //  		console.log(searchBox.value)
+		  //  		searchHandler.searchWithTownName(searchBox.value)
+		  //  		searchBox.value = ""
+		  		searchHandler.search()
 	   		});
 
 	},
@@ -49,12 +46,23 @@ var searchHandler = {
 		//console.log(songAndPlaylistHandler.townName)
 		songAndPlaylistHandler.townName = response["results"][0]["address_components"][0]["long_name"];
 		console.log(songAndPlaylistHandler.townName)
-		document.getElementById("songs").innerHTML = ""
-		songAndPlaylistHandler.bigArray = []
+		songAndPlaylistHandler.emptyResponse()
 		// songAndPlaylistHandler.initButton()
 		songAndPlaylistHandler.getSongs()
+	},
+
+	search: function () {
+		 searchBox = document.getElementById('search') 
+		   		console.log(searchBox.value)
+		   		searchHandler.searchWithTownName(searchBox.value)
+		   		searchBox.value = ""
+		   		sLink = document.getElementById("savelink")
+		sLink.textContent = "Save The Playlist"
+		sLink.setAttribute("href","#")
+		sLink.removeAttribute('target')
+		console.log(sLink);
 	}
 
 }
 
-window.onload = searchHandler.getUserInputedTownName()
+window.onload = searchHandler.initSearch()
