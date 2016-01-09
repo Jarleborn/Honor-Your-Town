@@ -43,3 +43,8 @@ var placesHandler = {
 }
 
 window.onload = placesHandler.getDetailAboutPlace("hoj")
+
+//region d
+// YOU HAVE BEEN WEBSTORMED
+console.log("hej")
+//endregion
