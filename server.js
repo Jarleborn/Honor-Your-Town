@@ -1,5 +1,6 @@
 /* Load the HTTP library */
 var userID;
+var path = require('path');
 var http = require("http");
 var SpotifyWebApi = require('spotify-web-api-node');
 var express = require("express")  , app = express()
@@ -12,9 +13,17 @@ var credentials = {
   //redirectUri : 'http://xn--dagsfrkaffe-vfb.nu:1337/'
   redirectUri : 'http://xn--dagsfrkaffe-vfb.nu:1337/inloggad'
 };
+
+//app.use("/components", express.static(__dirname + '/components'));
+app.use(express.static(path.join(__dirname, '/public'), { maxAge: 31557600000 }));
+app.use(express.static(path.join(__dirname, "/public/js"), { maxAge: 31557600000 }));
+app.use(express.static(path.join(__dirname, "/public/pics"), { maxAge: 31557600000 }));
+app.use(express.static(path.join(__dirname, '/public/css'), { maxAge: 31557600000 }));
+app.use(express.static(path.join(__dirname, '/public/materialize'), { maxAge: 31557600000 }));
+
  var spotifyApi = new SpotifyWebApi(credentials);
 //var spotifyApi = new SpotifyWebApi(credentials);
-app.use("/components", express.static(__dirname + '/components'));
+
 app.use(express.static(__dirname + '/public'));
 console.log("bajs")
   //Routes
