@@ -1,11 +1,10 @@
 ##Inledning 
  
-Jag har gjort en applikation som heter Honor Your Town. man kan använda den för att hitta låtar som handlar om staden man befiner sig i. Den hämtar ut användarens position med geolocation. Med den informationen så renderar den en google maps karta med användarens position utplacerad med en marker. 
+Jag har gjort en applikation som heter Honor Your Town. man kan använda den för att hitta låtar som handlar om staden man befiner sig i. Den hämtar ut användarens position och säger på låtar som har namnet på staden användaren befiner sig i inkluderad i titeln.
+Anväandren kan lyssna på låtarna och spara dom som en spotify lista. Använaderrn kan också söka på andra städer än den hen befiner sig i. 
 
-Jag använder också Google maps Geocoding API för att få reda på vilken stad platsen som hämtats är i. Sen söker jag på spotify efter låtar som innehåller stadens namn i sin titel. Dessa kan sedan lyssnas på eller spras som en lista. Geocoding APIet används också om man vill söka på en stad som man inte för i, för då kollar den upp latitud och longitud till staden som användaren har sökt på så att den nya platsen också kan presenteras med en karta och en marker. 
 
-Det ekniker jag har använt är:
-
+Det tekniker jag har annvänt är:
 
 På servern: 
 NodeJS - Node JSs är det server språk som jag känenr mig mest bekväm med. 
@@ -19,12 +18,16 @@ Geolocation - För att hämta användarens postition
 Materialize - För att få sidan responsiv och snygg
 Google Maps API - För att med en karta vissa användarens position
 Google Geocode API - För att tolka latitud och longitiude till ett stads namn och tvärt om. 
+Offline.js - För att tala om för användaren om hen tappar upkopling
 
 ##Inkludera en schematisk bild över applikationens beståndsdelar 
 <img src="utkast.png">
 ##Säkerhet och prestandaoptimering 
 
 ##Offline-first: Hur har du tänkt kring offline-first?
+
+Att göra applikationen avnändbar utan internet uppkopling har varit ett stort problem. Då det är svårt att söka och komma åt spotify utan internet. Dock så har jag annvänt biblioteket offline.js(http://github.hubspot.com/offline/docs/welcome/) för att vissa 
+ användaren om hen är kopplad till internet eller inte. Detta kollar det genom att med jämna mellan rum försöka hämta faviconen på sidan. Så länge detta inte går så vissas en text som berättar att anväandren är offline
 Offline.js
 
 ##Risker med din applikation: Reflektera över vilka risker det finns med din applikation; rent tekniskt, säkerhet, etiskt m.m.
@@ -32,6 +35,21 @@ Offline.js
 
 ##Egen reflektion kring projektet: Här tar du upp hur projektet har gått. Vilka eventuella problem har du stött på? Finns det funktioner som du velat implementera men inte hunnit? Hur skulle du vilja jobba vidare med din applikation?
 Bakgrund från google places - specific plats 
+Detta har varit en av mina favorit projekt hititls under utbildningen. Det är alltid roligt att själv få välja vad manska göra. Och med tanke på hur mycket tid vi fick så kunde man göra någor som blev en riktigt appliaktion, till skillnad från gallerier och 
+gissa det "hemliga tale" spel som vi i vanliga fall gör. Det var också väldigt roligt att jobba mot spotify som jag personligen använder varjedag och inte vet hur jag skulle kunna klara mig utan. det var också roligt att göra en applikation hjälper en uptäcka nya låtar
+då jag under utvecklingen har gjort nya fynd nästan dagligen. 
+
+Mitt största problem under utveckligen har varit att jag inte kan super mycekt om NodeJS. Jag tycker det både är intresant och skoj att jobba med, men med tanke på att jag är självlärd är där mycket jag inte kan. Så  mycket tid har gått till att förstå 
+hur jag ska göra saker som jag vill göra. Men jag kan helt klart säga att jag har lärt mig massor. 
+
+Sen så har jag ett probelm som ligger mer i min personlighet än i kodkunskaper. Som är att jag oftast använder dokumentationen som en sista utvägg. Jag provar mig hellre fram än jag läser på. Vilket ibland leder till att onödiga buggar kommer fram. Dett är något
+ som jag öfsöker jobba på konstant. OCh det går framåt. I detta projekt har min nyfikenhet inte förstört något viktigt, vilket har hänt i tidigare projekt. 
+ 
+En grej som jag känner har varit väldigt givande är att jag har i ett väldigt tidigt stadie haft versoner som legat live. vilket har gjort att jag har kunnat skicka länkar till vänner som kunnat testa appliaktionen. Detta har gjort att jag många gånger har haft 
+fler ögon än mina egna på rpojektet och på så viss fått tips om nya funktioer och buggar. 
+
+Jag ville att bakgrunden på startsidan skulle vara ett collage av bilder från google places på de mest sökta platserna. Dock så kan man inte hämta ut bilder från städer utan måste hämta specifica platser i staden. Detta blev problematiskt då jag bara 
+använder städer och inte specifica platser. Dock så har jag inte gett upp och hoppas kunna implementera funktionalitet för detta i framtiden. 
 
 ##Skriv också om de eventuella delar du anser vara betygshöjande med din applikation. Motivera varför du anser dessa vara betygshöjande.
 
