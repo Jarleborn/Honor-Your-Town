@@ -53,7 +53,4 @@ använder städer och inte specifica platser. Dock så har jag inte gett upp och
 
 ##Skriv också om de eventuella delar du anser vara betygshöjande med din applikation. Motivera varför du anser dessa vara betygshöjande.
 
-Jag har ett bra funktioner som jag annser vara betygshöjande. Först och främst att jag har använt mig av HTML5 APIet Geolocaiton för att hämta användarens position.
- Och för att jag har använt ramverket Materialize (http://materializecss.com/) för att få sidan så responsiv som möjligt
-Materialize
-GeoLocation
+Jag har som instruktionerna föreslår använt mig av HTML 5 APIet geolocation, för att hämta ut användarens posititon. Jag har också använt mig av ett ramverk som heter Materialize(http://materializecss.com/). Det är ett ramverk som i mångt och mycket liknar bootrstrap då det percis som bootstrap underlättar att skapa en responsiv design på sidan. Den stora skillnaden är att Materialize är mer specificerat mot det som kallas material design som är googles design språk(https://design.google.com/) 
