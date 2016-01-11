@@ -16,6 +16,28 @@
 .hidden{
   display: none;
 }
+
+
+#note1, #note2, #note3, #note4{
+    width: 20%;
+}
+
+#navlogo{
+    width: 50px;
+}
+
+#frontlogo{
+    width: 30%;
+}
+
+#logo{
+    width: 276px;
+    margin: auto;
+    position: relative;
+    top: 162px;
+    margin-left: 12%;
+
+}
 /*nav{
 	background-color: yellow;
 }
