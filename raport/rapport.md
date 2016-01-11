@@ -32,6 +32,11 @@ Offline.js
 
 ##Risker med din applikation: Reflektera över vilka risker det finns med din applikation; rent tekniskt, säkerhet, etiskt m.m.
 
+Med tanke på att jag använder OATH så hanterar min applikation inga driket kännsliga data så som användarnnamn och lösenord. Det ända som hanteras med spotify är en token som används för att auktorisera användaren mot spotify. Denna token gäller bara en viss tid vilket gör att om någon mot förmodan skulle få tag på dom så har dom en begränsad tid att använda dom. Applikationen är också inställd på så sätt att den bara begär rättigheter att göra sökningar och spellistor. 
+
+Sökrutan fungerar på så sätt att den hämtar värdet och inte tillexempel innerHTML. Detta gör att om användaren skriver en scripttag så hanteras den som en sträng som sedan används i  sökningen istället för att hanteras som en script tag. 
+
+Om man ska se på aplikationen rent etiskt så det alltid lite speciellt när man använder användares positioner. jag själv kan känna mig övervakad när en applikation hämtar min position utan att jag vet om det. Därför tycker jag att det är jätte bra att Geolocation automatiskt frågar om användaren tycker att det är okej
 
 ##Egen reflektion kring projektet: Här tar du upp hur projektet har gått. Vilka eventuella problem har du stött på? Finns det funktioner som du velat implementera men inte hunnit? Hur skulle du vilja jobba vidare med din applikation?
 
