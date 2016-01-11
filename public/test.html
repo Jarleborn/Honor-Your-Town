@@ -1,0 +1,29 @@
+<div id="box">  </div>
+<script>
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id))
+    {js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+
+    var townname = "malmö";
+    var spotifylink = "https://open.spotify.com/user/lemmingboy/playlist/0DH5qvpFrGiZOQi43ubjrX";
+    function init(){
+
+        var tweetbutton = document.createElement("a");
+        tweetbutton.className = "twitter-shared-button";
+        tweetbutton.setAttribute("data-text","here is a list of all songs about"+ townname+"" );
+        tweetbutton.setAttribute("data-url",spotifylink );
+        tweetbutton.setAttribute("data-via","the_knug" );
+        tweetbutton.setAttribute("href","https://twitter.com/share" );
+        tweetbutton.setAttribute("data-size","large" );
+        tweetbutton.textContent = "Shear on twitter"
+
+        document.getElementById("box").appendChild(tweetbutton)
+    }
+
+
+
+    window.onload = init()
+</script>
+
+
+<a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://xn--dagsfrkaffe-vfb.nu:1337/" data-text="hoj hoj hoj hij" data-via="The_Knug" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
