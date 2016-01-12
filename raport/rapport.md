@@ -24,6 +24,12 @@ Offline.js - För att tala om för användaren om hen tappar upkopling
 <img src="utkast.png">
 ##Säkerhet och prestandaoptimering 
 
+Prestanda optimering är något jag verkligen har försökt jobba med då sidan gör relativt många requests mot servern. Men jag har cachat alla statiska resurser på servern så att den hämtar dom snabbare och när man som användare besöker sidan en andra gång så laddar den betydligt mycket snabbare. Jag har även en laddnings sida som vissas när man loggar in så att användaren ska slippa se när sidan långsamt växer fram. 
+
+Jag har även komprimerat resurser 
+________________><---------------------
+sidan får ditten av datte här https://developers.google.com/speed/pagespeed/insights/?url=webbprogrammerare.se&tab=desktop
+
 ##Offline-first: Hur har du tänkt kring offline-first?
 
 Att göra applikationen avnändbar utan internet uppkopling har varit ett stort problem. Då det är svårt att söka och komma åt spotify utan internet. Dock så har jag annvänt biblioteket offline.js(http://github.hubspot.com/offline/docs/welcome/) för att vissa 
