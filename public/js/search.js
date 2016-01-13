@@ -33,6 +33,7 @@ var searchHandler = {
                 if (xhr.responseText["results"] != []) {
                     searchHandler.succesfulResponse(JSON.parse(xhr.responseText));
                 }
+                searchHandler.failResponse();
             }
         };
 	    xhr.open("GET", "https://maps.googleapis.com/maps/api/geocode/json?address=" + userInputedTownName + "&key=AIzaSyC9frD5YpO4uLFqw6ca-vuMn_obtsgR_CQ", true);
@@ -50,6 +51,12 @@ var searchHandler = {
 		// songAndPlaylistHandler.initButton()
         
 		//songAndPlaylistHandler.getSongs();
+	},
+    
+    failResponse: function () {
+		console.log("to the black bird");
+        var searchBox = document.getElementById('search');
+        searchBox.value = "We are very sorry to tell you that we can't find annything";
 	},
 
 	search: function () {
