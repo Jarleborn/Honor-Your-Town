@@ -7,16 +7,23 @@ var songAndPlaylistHandler = {
 
     initButton: function () {
         var sLink = document.getElementById("savelink");
-        sLink.addEventListener("click", function () {
-            songAndPlaylistHandler.createPlaylist();
-        });
+        sLink.textContent = "Save The Playlist";
+		sLink.setAttribute("href","#");
+		sLink.removeAttribute('target');
+        sLink.addEventListener("click", songAndPlaylistHandler.createPlaylist, true);
     },
+    
+    createPlaylist: function(event){
+         songAndPlaylistHandler.createPlaylist();
+    },
+    
 	getSongs: function () {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var res = JSON.parse(xhr.responseText);
-                console.log(res);
+        console.log("getsongs")
+        var xhr2 = new XMLHttpRequest();
+        xhr2.onreadystatechange = function () {
+            if (xhr2.readyState == 4 && xhr2.status == 200) {
+                var res = JSON.parse(xhr2.responseText);
+                //console.log(res);
                 for (var i = 0; i < res["tracks"]["items"].length; i++){
 //                    var array = [];
                     var preurl = trackname = res["tracks"]["items"][i].preview_url;
@@ -33,48 +40,49 @@ var songAndPlaylistHandler = {
                     
                     if(trackname.indexOf(songAndPlaylistHandler.townName) > -1){
                         var trackObject = { artistName:artistname, trackName:trackname, id:id, preurl:preurl, uri:uri, img:img, url:url};
-                        console.log(trackObject.trackName);
+                        //console.log(trackObject.trackName);
                         songAndPlaylistHandler.bigArray.push(trackObject);
                     }
-                    //console.log(res["tracks"]["items"][i].name+ "  med   "+res["tracks"]["items"][i].artists[0].name );
+                    ////console.log(res["tracks"]["items"][i].name+ "  med   "+res["tracks"]["items"][i].artists[0].name );
 
                     //bigArray.push(array)
                 }
-                console.log(songAndPlaylistHandler.bigArray);
+                console.log("här"+songAndPlaylistHandler.bigArray.length);
                 songAndPlaylistHandler.loopout(songAndPlaylistHandler.bigArray);
                 //songAndPlaylistHandler.initButton()
-                //console.log(res["results"][0]["address_components"][3]["long_name"]);
+                ////console.log(res["results"][0]["address_components"][3]["long_name"]);
 
             }
         };	
         //xhr.open("GET", "https://api.spotify.com/v1/search?q="+townName+"&type=track&limit=50", true);
-        xhr.open("GET", 'https://api.spotify.com/v1/search?q='+songAndPlaylistHandler.townName+'&type=track&limit=50', true);
-        xhr.send();
+        xhr2.open("GET", 'https://api.spotify.com/v1/search?q='+songAndPlaylistHandler.townName+'&type=track&limit=50', true);
+        xhr2.send();
 
 	},
 
 	createPlaylist: function(){
-		console.log("Gör Lista");
+		//console.log("Gör Lista");
 		var xhr = new XMLHttpRequest();
 		//xhr2 = new XMLHttpRequest();
-//		console.log("The child is crying do sometihing about that")
+//		//console.log("The child is crying do sometihing about that")
 		var songstrings = [];
 		xhr.onreadystatechange = function() {
-			console.log(xhr.readyState);
+			//console.log(xhr.readyState);
         	if (xhr.readyState == 4 && xhr.status == 200) {
-        		console.log(JSON.parse(xhr.responseText));
+        		//console.log(JSON.parse(xhr.responseText));
         		var linkAndId = JSON.parse(xhr.responseText);
         		songAndPlaylistHandler.urlToUserPlaylist = linkAndId.link;
         		songAndPlaylistHandler.playlistid = linkAndId.id;
-        		console.log("VAD STÅR DET HÄR????"+songAndPlaylistHandler.playlistid);
+        		//console.log("VAD STÅR DET HÄR????"+songAndPlaylistHandler.playlistid);
         		
         		for (var i = 0; i < songAndPlaylistHandler.bigArray.length; i++) {
 
         			songstrings.push(songAndPlaylistHandler.bigArray[i].uri);
         			
         		}
-        		console.log(songstrings);
+        		//console.log(songstrings);
         		 songAndPlaylistHandler.addTracksToplaylist(songstrings);
+                
       		}
       		 	
     	};
@@ -98,10 +106,13 @@ var songAndPlaylistHandler = {
 			
         	if (xhr.readyState == 4 && xhr.status == 200) {
         		var v = xhr.responseText;
+                
         		var sLink = document.getElementById("savelink");
-        		sLink.textContent = "The Playslist Is Saved, Click Here To View It";
+        		sLink.removeEventListener("click", songAndPlaylistHandler.createPlaylist, true);
+                sLink.textContent = "The Playslist Is Saved, Click Here To View It";
         		sLink.setAttribute("href",songAndPlaylistHandler.urlToUserPlaylist);
         		sLink.setAttribute("target","_blank");
+                //console.log(sLink);
       		}
     	};	
 	    var pit = song;
@@ -113,15 +124,17 @@ var songAndPlaylistHandler = {
 	},
 
 	loopout: function(arrayOfSongs){
+        
+        //console.warn("loppar");
 		songAndPlaylistHandler.setCardName();
 		songAndPlaylistHandler.getCoverArt();
-		console.log("kör");
+		//console.log("kör");
 		var diven = document.getElementById("songs");
 		if(arrayOfSongs.length <= 0){
-			console.log("hoj");
+			//console.log("hoj");
 			diven.textContent = "Tyvärr hittades inga låtar, vänlige se till att spendera din tid i en riktig stad";
 		}
-		console.log(diven);
+		//console.log(diven);
 		for(var i = 0; i < arrayOfSongs.length; i++){
 			var litag = document.createElement("li");
 			
@@ -138,7 +151,7 @@ var songAndPlaylistHandler = {
 			diven.appendChild(atag); 
 			//diven.appendChild(audioTag) 
 		}
-
+       
 		load.loadCheck();
 		
 	},
@@ -160,8 +173,10 @@ var songAndPlaylistHandler = {
 	}, 
 
 	emptyResponse: function() {
+        console.log("tömer");
+        songAndPlaylistHandler.bigArray = [];
 		document.getElementById("songs").innerHTML = "";
-		songAndPlaylistHandler.bigArray = [];
+		
 		
 	}
 };

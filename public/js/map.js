@@ -33,6 +33,7 @@ var mapHandler = {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var res = JSON.parse(xhr.responseText);
                 songAndPlaylistHandler.townName = res["results"][0]["address_components"][3]["long_name"];
+                console.log("är det här");
                 songAndPlaylistHandler.getSongs(res["results"][0]["address_components"][3]["long_name"]);
             }
     	}	

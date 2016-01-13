@@ -26,7 +26,7 @@ var searchHandler = {
 	},
 
 	searchWithTownName: function (userInputedTownName) {
-//		console.log("bajs")
+		console.log("bajs")
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function () {
         	if (xhr.readyState == 4 && xhr.status == 200) {
@@ -40,15 +40,16 @@ var searchHandler = {
 	},
 
 	succesfulResponse: function (response) {
-//		console.log("to the black bird")
+		console.log("to the black bird");
 //		console.log(response["results"][0]["address_components"])
 		mapHandler.initMap(response["results"][0]["geometry"]["location"].lat, response["results"][0]["geometry"]["location"].lng);
 		//console.log(songAndPlaylistHandler.townName)
 		songAndPlaylistHandler.townName = response["results"][0]["address_components"][0]["long_name"];
 		console.log(songAndPlaylistHandler.townName);
-		songAndPlaylistHandler.emptyResponse();
+//		songAndPlaylistHandler.emptyResponse();
 		// songAndPlaylistHandler.initButton()
-		songAndPlaylistHandler.getSongs();
+        
+		//songAndPlaylistHandler.getSongs();
 	},
 
 	search: function () {
@@ -57,11 +58,11 @@ var searchHandler = {
         searchHandler.searchWithTownName(searchBox.value);
         searchBox.value = "";
         var sLink = document.getElementById("savelink");
-		sLink.textContent = "Save The Playlist";
-		sLink.setAttribute("href","#");
-		sLink.removeAttribute('target');
+        songAndPlaylistHandler.emptyResponse();
+		songAndPlaylistHandler.initButton();
+//        sLink.removeEventListener("click", songAndPlaylistHandler.createPlaylist, true);
 		console.log(sLink);
-	};
+	}
 
 }
 
