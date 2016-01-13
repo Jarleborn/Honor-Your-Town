@@ -1,10 +1,6 @@
- var load = {
-	loadCheck: function(){
-		
-			console.log("sug min kuk")
-	    	document.getElementById('loading').className = "hidden";
-	 }
-
-
-}  
-
+"use strict";
+var load = {
+	loadCheck: function () {
+        document.getElementById('loading').className = "hidden";
+    }
+};
