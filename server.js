@@ -3,7 +3,7 @@ var userID;
 var path = require('path');
 var http = require("http");
 var SpotifyWebApi = require('spotify-web-api-node');
-var express = require("express")  , app = express()
+var express = require("express"), app = express()
   , port = "1337"
   , ipaddr = 'localhost';
   //, ipaddr = environment.IPDR;
@@ -85,9 +85,10 @@ console.log("hoj " + data.name)
       .then(function(data) {
       //console.log('Created playlist!' + data.body.id);
       res.send(JSON.stringify({"id":data.body.id, "link":data.body["external_urls"].spotify }))
-      }, function(err) {
-      console.log('Something went wrong!', err);
-     })
+      }, 
+      function(err) {
+        console.log('Something went wrong!', err);
+      })
       });      });
       });
 

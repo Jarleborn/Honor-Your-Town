@@ -30,10 +30,19 @@ var searchHandler = {
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function () {
         	if (xhr.readyState == 4 && xhr.status == 200) {
-                if (xhr.responseText["results"] != []) {
-                    searchHandler.succesfulResponse(JSON.parse(xhr.responseText));
+                
+                var response = JSON.parse(xhr.responseText);
+                console.log(response["results"]);
+                if (response["results"].length > 0) {
+                    searchHandler.succesfulResponse(response);
                 }
-                searchHandler.failResponse();
+                else{
+                    searchHandler.failResponse();    
+                }
+                
+            }
+            else if (xhr.readyState == 403 || xhr.status == 404 || xhr.status == 500) {
+                songAndPlaylistHandler.apiError("spotify");
             }
         };
 	    xhr.open("GET", "https://maps.googleapis.com/maps/api/geocode/json?address=" + userInputedTownName + "&key=AIzaSyC9frD5YpO4uLFqw6ca-vuMn_obtsgR_CQ", true);

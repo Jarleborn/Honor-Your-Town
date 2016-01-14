@@ -23,35 +23,46 @@ var songAndPlaylistHandler = {
         xhr2.onreadystatechange = function () {
             if (xhr2.readyState == 4 && xhr2.status == 200) {
                 var res = JSON.parse(xhr2.responseText);
-                //console.log(res);
-                for (var i = 0; i < res["tracks"]["items"].length; i++){
-//                    var array = [];
-                    var preurl = trackname = res["tracks"]["items"][i].preview_url;
-                    var id = trackname = res["tracks"]["items"][i].id;
-                    var trackname = res["tracks"]["items"][i].name;
-                    var url = res["tracks"]["items"][i]["external_urls"].spotify;
-                    var artistname = res["tracks"]["items"][i].artists[0].name;
-                    var uri = res["tracks"]["items"][i].uri;
-                    var img = null;
-                    if(res["tracks"]["items"][i]["album"]["images"][0] !== null || res["tracks"]["items"][i]["album"]["images"][0] !== undefined){
-                         img = res["tracks"]["items"][i]["album"]["images"][0].url;
-                    }
-                    
-                    
-                    if(trackname.indexOf(songAndPlaylistHandler.townName) > -1){
-                        var trackObject = { artistName:artistname, trackName:trackname, id:id, preurl:preurl, uri:uri, img:img, url:url};
-                        //console.log(trackObject.trackName);
-                        songAndPlaylistHandler.bigArray.push(trackObject);
-                    }
-                    ////console.log(res["tracks"]["items"][i].name+ "  med   "+res["tracks"]["items"][i].artists[0].name );
+                console.warn(res);
+                
+                if(res["tracks"]["items"].length != 0){
+                    for (var i = 0; i < res["tracks"]["items"].length; i++){
+    //                    var array = [];
+                        var preurl = trackname = res["tracks"]["items"][i].preview_url;
+                        var id = trackname = res["tracks"]["items"][i].id;
+                        var trackname = res["tracks"]["items"][i].name;
+                        var url = res["tracks"]["items"][i]["external_urls"].spotify;
+                        var artistname = res["tracks"]["items"][i].artists[0].name;
+                        var uri = res["tracks"]["items"][i].uri;
+                        var img = null;
+                        if(res["tracks"]["items"][i]["album"]["images"][0] !== null || res["tracks"]["items"][i]["album"]["images"][0] !== undefined){
+                             img = res["tracks"]["items"][i]["album"]["images"][0].url;
+                        }
 
-                    //bigArray.push(array)
+
+                        if(trackname.indexOf(songAndPlaylistHandler.townName) > -1){
+                            var trackObject = { artistName:artistname, trackName:trackname, id:id, preurl:preurl, uri:uri, img:img, url:url};
+                            //console.log(trackObject.trackName);
+                            songAndPlaylistHandler.bigArray.push(trackObject);
+                        }
+                        ////console.log(res["tracks"]["items"][i].name+ "  med   "+res["tracks"]["items"][i].artists[0].name );
+
+                        //bigArray.push(array)
+                    }
+                    console.log("här"+songAndPlaylistHandler.bigArray.length);
+                    songAndPlaylistHandler.loopout(songAndPlaylistHandler.bigArray);
+                    //songAndPlaylistHandler.initButton()
+                    ////console.log(res["results"][0]["address_components"][3]["long_name"]);
                 }
-                console.log("här"+songAndPlaylistHandler.bigArray.length);
-                songAndPlaylistHandler.loopout(songAndPlaylistHandler.bigArray);
-                //songAndPlaylistHandler.initButton()
-                ////console.log(res["results"][0]["address_components"][3]["long_name"]);
-
+                else{
+                    songAndPlaylistHandler.setCardName();
+		            songAndPlaylistHandler.getCoverArt();
+                    var diven = document.getElementById("songs");
+                    diven.textContent = "Tyvärr hittades inga låtar, vänlige se till att spendera din tid i en riktig stad";
+                }
+            }
+            else if (xhr2.readyState == 403 || xhr2.status == 404 || xhr2.status == 500) {
+                songAndPlaylistHandler.apiError("spotify");
             }
         };	
         //xhr.open("GET", "https://api.spotify.com/v1/search?q="+townName+"&type=track&limit=50", true);
@@ -69,6 +80,7 @@ var songAndPlaylistHandler = {
 		xhr.onreadystatechange = function() {
 			//console.log(xhr.readyState);
         	if (xhr.readyState == 4 && xhr.status == 200) {
+                
         		//console.log(JSON.parse(xhr.responseText));
         		var linkAndId = JSON.parse(xhr.responseText);
         		songAndPlaylistHandler.urlToUserPlaylist = linkAndId.link;
@@ -84,6 +96,9 @@ var songAndPlaylistHandler = {
         		 songAndPlaylistHandler.addTracksToplaylist(songstrings);
                 
       		}
+            else if (xhr.readyState == 403 || xhr.status == 404 || xhr.status == 500) {
+                songAndPlaylistHandler.apiError("spotify");
+            }
       		 	
     	};
   
@@ -95,7 +110,10 @@ var songAndPlaylistHandler = {
 	    	JSON.stringify({"name":"Låtar om " + songAndPlaylistHandler.townName})
 				);
 	},
-
+    
+	apiError: function (apiName) {
+        document.getElementById("songs").textContent = "Unefortunaly is " + apiName + " down at the moment";
+    },
 	addTracksToplaylist: function(song){
 		
 		var xhr = new XMLHttpRequest();
@@ -130,10 +148,10 @@ var songAndPlaylistHandler = {
 		songAndPlaylistHandler.getCoverArt();
 		//console.log("kör");
 		var diven = document.getElementById("songs");
-		if(arrayOfSongs.length <= 0){
-			//console.log("hoj");
-			diven.textContent = "Tyvärr hittades inga låtar, vänlige se till att spendera din tid i en riktig stad";
-		}
+//		if(arrayOfSongs.length <= 0){
+//			//console.log("hoj");
+//			diven.textContent = "Tyvärr hittades inga låtar, vänlige se till att spendera din tid i en riktig stad";
+//		}
 		//console.log(diven);
 		for(var i = 0; i < arrayOfSongs.length; i++){
 			var litag = document.createElement("li");
@@ -156,10 +174,10 @@ var songAndPlaylistHandler = {
 		
 	},
 
-	getCoverArt: function(){
+    getCoverArt: function(){
 	
 		for (var i = 0; i < 4; i++) {
-			if(songAndPlaylistHandler.bigArray[i] !== undefined || songAndPlaylistHandler.bigArray[i] !== null ){
+			if(songAndPlaylistHandler.bigArray[i] != undefined || songAndPlaylistHandler.bigArray[i] != null ){
 			document.getElementById(i).setAttribute("src",songAndPlaylistHandler.bigArray[i].img);
 		}
 		else{

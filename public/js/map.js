@@ -36,6 +36,9 @@ var mapHandler = {
                 console.log("är det här");
                 songAndPlaylistHandler.getSongs(res["results"][0]["address_components"][3]["long_name"]);
             }
+            else if (xhr.readyState == 403 || xhr.status == 404 || xhr.status == 500) {
+                songAndPlaylistHandler.apiError("spotify");
+            }
     	}	
 	    xhr.open("GET", "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&key=AIzaSyC9frD5YpO4uLFqw6ca-vuMn_obtsgR_CQ", true);
 	    xhr.send();

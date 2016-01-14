@@ -3,20 +3,16 @@
     !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id))
     {js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
-    var townname = "malmö";
-    var spotifylink = "https://open.spotify.com/user/lemmingboy/playlist/0DH5qvpFrGiZOQi43ubjrX";
     function init(){
 
-        var tweetbutton = document.createElement("a");
-        tweetbutton.className = "twitter-shared-button";
-        tweetbutton.setAttribute("data-text","here is a list of all songs about"+ townname+"" );
-        tweetbutton.setAttribute("data-url",spotifylink );
-        tweetbutton.setAttribute("data-via","the_knug" );
-        tweetbutton.setAttribute("href","https://twitter.com/share" );
-        tweetbutton.setAttribute("data-size","large" );
-        tweetbutton.textContent = "Shear on twitter"
-
-        document.getElementById("box").appendChild(tweetbutton)
+           var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              console.log(JSON.parse(xhr.responseText));
+            }
+    	}	
+	    xhr.open("GET", "https://maps.googleapis.com/maps/api/place/autocomplete/xml?input=Amoeba&types=establishment&location=37.76999,-122.44696&radius=500&key=AIzaSyC9frD5YpO4uLFqw6ca-vuMn_obtsgR_CQ", true);
+	    xhr.send();
     }
 
 

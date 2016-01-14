@@ -47,6 +47,7 @@ Om man ska se på aplikationen rent etiskt så det alltid lite speciellt när ma
 ##Egen reflektion kring projektet: Här tar du upp hur projektet har gått. Vilka eventuella problem har du stött på? Finns det funktioner som du velat implementera men inte hunnit? Hur skulle du vilja jobba vidare med din applikation?
 
 Bakgrund från google places - specific plats 
+
 Detta har varit en av mina favorit projekt hititls under utbildningen. Det är alltid roligt att själv få välja vad manska göra. Och med tanke på hur mycket tid vi fick så kunde man göra någor som blev en riktigt appliaktion, till skillnad från gallerier och 
 gissa det "hemliga tale" spel som vi i vanliga fall gör. Det var också väldigt roligt att jobba mot spotify som jag personligen använder varjedag och inte vet hur jag skulle kunna klara mig utan. det var också roligt att göra en applikation hjälper en uptäcka nya låtar
 då jag under utvecklingen har gjort nya fynd nästan dagligen. 
