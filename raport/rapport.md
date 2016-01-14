@@ -33,8 +33,16 @@ Google Maps API - För att med en karta vissa användarens position
 
 Google Geocode API - För att kunna tolka latituder och longituder till stadsnamn och tävrt om. 
 
-##Inkludera en schematisk bild över applikationens beståndsdelar 
-<img src="utkastdsa.png">
+##Schematiska bilder över applikationens beståndsdelar
+
+En använadren öppnar sidan och sparar en lista över låtar basserat på sin position
+
+<img src="1.png">
+
+En sökning 
+
+<img src="2.png">
+
 ##Säkerhet och prestandaoptimering 
 
 Prestanda optimering är något jag verkligen har försökt jobba med då sidan gör relativt många requests mot servern. Men jag har cachat alla statiska resurser på servern så att den hämtar dom snabbare och när man som användare besöker sidan en andra gång så laddar den betydligt mycket snabbare. Jag har även en laddnings sida som vissas när man loggar in så att användaren ska slippa se när sidan långsamt växer fram. 
