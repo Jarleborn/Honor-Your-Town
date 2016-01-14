@@ -1,27 +1,40 @@
 ##Inledning 
  
-Jag har gjort en applikation som heter Honor Your Town. man kan använda den för att hitta låtar som handlar om staden man befiner sig i. Den hämtar ut användarens position och säger på låtar som har namnet på staden användaren befiner sig i inkluderad i titeln.
+Jag har gjort en applikation som heter Honor Your Town. Man kan använda den för att hitta låtar som handlar om staden man befiner sig i. Den hämtar ut användarens position och söker på låtar som har namnet på staden användaren befiner sig i inkluderad i titeln.
 Anväandren kan lyssna på låtarna och spara dom som en spotify lista. Använaderrn kan också söka på andra städer än den hen befiner sig i. 
-
 
 Det tekniker jag har annvänt är:
 
 På servern: 
-NodeJS - Node JSs är det server språk som jag känenr mig mest bekväm med. 
-Express - För att förenkla anroppen mot servern från klientetn
-spotify-web-api-node - För att underlätta koplingen mellan servern och spotify
-Spotify Web API - För att kunna anävdna sporitdy
 
-På Klientent
+NodeJS - Node JSs är det server språk som jag känenr mig mest bekväm att arbeta med. Det är också det som jag tycker är roligast.
+
+Express - Som är en Node Modul som underlättar routing och på så viss udnerlättas anropp från klienten til lservern
+
+spotify-web-api-node - Är en Node Modul som jag änvänder för att underlätta koplingen mellan servern och spotify
+
+
+På Klientent:
+
 Jacascript - Det är det språk jag är mest bekväm i och även det jag tycker är rolgiast att skriva i
+
 Geolocation - För att hämta användarens postition
-Materialize - För att få sidan responsiv och snygg
+
+Materialize - Ett bibliotek jag använder för att få sidan responsiv och snygg
+
+Offline.js - Ett bibliotek jag använder för att tala om för användaren om hen tappar upkopling
+
+
+APIer:
+
+Spotify Web API - För att kunna använda spotifys funktionalitet. 
+
 Google Maps API - För att med en karta vissa användarens position
-Google Geocode API - För att tolka latitud och longitiude till ett stads namn och tvärt om. 
-Offline.js - För att tala om för användaren om hen tappar upkopling
+
+Google Geocode API - För att kunna tolka latituder och longituder till stadsnamn och tävrt om. 
 
 ##Inkludera en schematisk bild över applikationens beståndsdelar 
-<img src="utkast.png">
+<img src="utkastdsa.png">
 ##Säkerhet och prestandaoptimering 
 
 Prestanda optimering är något jag verkligen har försökt jobba med då sidan gör relativt många requests mot servern. Men jag har cachat alla statiska resurser på servern så att den hämtar dom snabbare och när man som användare besöker sidan en andra gång så laddar den betydligt mycket snabbare. Jag har även en laddnings sida som vissas när man loggar in så att användaren ska slippa se när sidan långsamt växer fram. 
@@ -32,37 +45,35 @@ sidan får ditten av datte här https://developers.google.com/speed/pagespeed/in
 
 ##Offline-first: Hur har du tänkt kring offline-first?
 
-Att göra applikationen avnändbar utan internet uppkopling har varit ett stort problem. Då det är svårt att söka och komma åt spotify utan internet. Dock så har jag annvänt biblioteket offline.js(http://github.hubspot.com/offline/docs/welcome/) för att vissa 
- användaren om hen är kopplad till internet eller inte. Detta kollar det genom att med jämna mellan rum försöka hämta faviconen på sidan. Så länge detta inte går så vissas en text som berättar att anväandren är offline
-Offline.js
+Att göra applikationen användbar utan internet uppkopling har varit ett stort problem. Då det är svårt att söka och komma åt spotify utan internet. Dock så har jag annvänt biblioteket offline.js(http://github.hubspot.com/offline/docs/welcome/) för att vissa 
+användaren om hen är kopplad till internet eller inte. Detta kollar det genom att med jämna mellan rum försöka hämta faviconen på sidan. Så länge detta inte går så vissas en text som berättar att anväandren är offline.
 
-##Risker med din applikation: Reflektera över vilka risker det finns med din applikation; rent tekniskt, säkerhet, etiskt m.m.
+Laddar man om sidan så kommer man tappa listan och sidan gör en ny sökning på användarens plats. Detta har jag funderat på och kommit fram till inte är en mer avacnerad process än att det gott kan vara så. För att spara sökningar och liknande i localstorage känns meningslöst då man behvöer informationen så pass kort stund. 
 
-Med tanke på att jag använder OATH så hanterar min applikation inga driket kännsliga data så som användarnnamn och lösenord. Det ända som hanteras med spotify är en token som används för att auktorisera användaren mot spotify. Denna token gäller bara en viss tid vilket gör att om någon mot förmodan skulle få tag på dom så har dom en begränsad tid att använda dom. Applikationen är också inställd på så sätt att den bara begär rättigheter att göra sökningar och spellistor. 
+##Risker med applikationen tekniskt, säkerhet, etiskt m.m.
 
-Sökrutan fungerar på så sätt att den hämtar värdet och inte tillexempel innerHTML. Detta gör att om användaren skriver en scripttag så hanteras den som en sträng som sedan används i  sökningen istället för att hanteras som en script tag. 
+Med tanke på att jag använder OATH så hanterar min applikation inga driket kännsliga data så som användarnnamn och lösenord. Det ända som hanteras med koppling till användarens spotify konto,  är en token som används för att auktorisera användaren mot spotify. Denna token gäller bara en viss tid vilket gör att om någon mot förmodan skulle få tag på den så har dom en begränsad tid att använda den. Applikationen är också inställd på så sätt att den bara begär rättigheter att göra sökningar och spellistor. 
 
-Om man ska se på aplikationen rent etiskt så det alltid lite speciellt när man använder användares positioner. jag själv kan känna mig övervakad när en applikation hämtar min position utan att jag vet om det. Därför tycker jag att det är jätte bra att Geolocation automatiskt frågar om användaren tycker att det är okej
+Sökrutan fungerar på så sätt att den hämtar värdet och inte HTMLen ur rutan. Detta gör att om användaren skriver en scripttag så hanteras den som en sträng som sedan används i  sökningen istället för att hanteras som en script tag. 
+
+Om man ska se på aplikationen rent etiskt så det alltid lite speciellt när man använder användares positioner. jag själv kan känna mig övervakad när en applikation hämtar min position utan att jag vet om det. Därför tycker jag att det är jätte bra att Geolocation automatiskt frågar om användaren tycker att det är okej att appliaktionen använder platsen.
 
 ##Egen reflektion kring projektet: Här tar du upp hur projektet har gått. Vilka eventuella problem har du stött på? Finns det funktioner som du velat implementera men inte hunnit? Hur skulle du vilja jobba vidare med din applikation?
 
-Bakgrund från google places - specific plats 
-
 Detta har varit en av mina favorit projekt hititls under utbildningen. Det är alltid roligt att själv få välja vad manska göra. Och med tanke på hur mycket tid vi fick så kunde man göra någor som blev en riktigt appliaktion, till skillnad från gallerier och 
-gissa det "hemliga tale" spel som vi i vanliga fall gör. Det var också väldigt roligt att jobba mot spotify som jag personligen använder varjedag och inte vet hur jag skulle kunna klara mig utan. det var också roligt att göra en applikation hjälper en uptäcka nya låtar
-då jag under utvecklingen har gjort nya fynd nästan dagligen. 
+gissa det "hemliga talet"-spel som vi i vanliga fall gör. Det var också väldigt roligt att jobba mot spotify som jag personligen använder varje dag och inte vet hur jag skulle kunna klara mig utan. Det var också roligt att göra en applikation som hjälper en uptäcka nya låtar då jag under utvecklingen har gjort nya fynd nästan dagligen. 
 
-Mitt största problem under utveckligen har varit att jag inte kan super mycekt om NodeJS. Jag tycker det både är intresant och skoj att jobba med, men med tanke på att jag är självlärd är där mycket jag inte kan. Så  mycket tid har gått till att förstå 
+Mitt största problem under utveckligen har varit att jag inte kan super mycekt om NodeJS. Jag tycker det både är intresant och skoj att jobba med, men med tanke på att jag är självlärd är där mycket jag inte kan. Så mycket tid har gått till att förstå 
 hur jag ska göra saker som jag vill göra. Men jag kan helt klart säga att jag har lärt mig massor. 
 
-Sen så har jag ett probelm som ligger mer i min personlighet än i kodkunskaper. Som är att jag oftast använder dokumentationen som en sista utvägg. Jag provar mig hellre fram än jag läser på. Vilket ibland leder till att onödiga buggar kommer fram. Dett är något
- som jag öfsöker jobba på konstant. OCh det går framåt. I detta projekt har min nyfikenhet inte förstört något viktigt, vilket har hänt i tidigare projekt. 
- 
-En grej som jag känner har varit väldigt givande är att jag har i ett väldigt tidigt stadie haft versoner som legat live. vilket har gjort att jag har kunnat skicka länkar till vänner som kunnat testa appliaktionen. Detta har gjort att jag många gånger har haft 
-fler ögon än mina egna på rpojektet och på så viss fått tips om nya funktioer och buggar. 
+En grej som jag känner har varit väldigt givande är att jag har i ett väldigt tidigt stadie haft versioner som legat live. Vilket har gjort att jag har kunnat skicka länkar till vänner som kunnat testa appliaktionen. Detta har gjort att jag många gånger har haft 
+fler ögon än mina egna på projektet och på så viss fått tips om nya funktioner och buggar. 
 
 Jag ville att bakgrunden på startsidan skulle vara ett collage av bilder från google places på de mest sökta platserna. Dock så kan man inte hämta ut bilder från städer utan måste hämta specifica platser i staden. Detta blev problematiskt då jag bara 
 använder städer och inte specifica platser. Dock så har jag inte gett upp och hoppas kunna implementera funktionalitet för detta i framtiden. 
+
+Sen så har jag ett probelm som ligger mer i min personlighet än i kodkunskaper. Som är att jag oftast använder dokumentationen som en sista utvägg. Jag provar mig hellre fram än jag läser på. Vilket ibland leder till att onödiga buggar kommer fram. Dett är något
+ som jag öfsöker jobba på konstant. OCh det går framåt. I detta projekt har min nyfikenhet inte förstört något viktigt, vilket har hänt i tidigare projekt.
 
 ##Skriv också om de eventuella delar du anser vara betygshöjande med din applikation. Motivera varför du anser dessa vara betygshöjande.
 
