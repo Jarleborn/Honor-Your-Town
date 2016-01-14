@@ -4,9 +4,6 @@ var placesHandler = {
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-//                var v = xhr.responseText;
-//                console.log(JSON.parse(v));
-//                console.log(JSON.parse(v));
                 var w = JSON.parse(xhr.responseText);
                 for (var i = 0; i < w["result"]["photos"].length; i++) {
                     console.log(w["result"]["photos"][i]["photo_reference"]);
@@ -22,21 +19,10 @@ var placesHandler = {
 
 
 	getPics: function (argument) {
-		// xhr = new XMLHttpRequest();
-		// xhr.onreadystatechange = function() {
-  //       	if (xhr.readyState == 4 && xhr.status == 200) {
-  //       		v = xhr.responseText
-        		//console.log(v.getUrl())
         		var img = document.createElement("img");
         		img.setAttribute("src",'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='+argument+'&key=AIzaSyC9frD5YpO4uLFqw6ca-vuMn_obtsgR_CQ');
        			document.getElementById('bajs').appendChild(img);		
-}
- //    	}	
-	//  	xhr.open("GET", 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='+argument+'&key=AIzaSyC9frD5YpO4uLFqw6ca-vuMn_obtsgR_CQ', true);
-	//     xhr.send(
-				
-	// 		);
-	// }
+
 };
 
 window.onload = placesHandler.getDetailAboutPlace("hoj");

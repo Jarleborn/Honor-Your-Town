@@ -4,9 +4,6 @@
 var searchHandler = {
 
 	initSearch: function () {
-//		console.log("To The Black Bird")
-//		console.log(document.activeElement)
-
 		document.getElementById("search").addEventListener("keypress", function (e) {
 	      
             if (e.keyCode == 13 && !e.shiftKey) {
@@ -15,11 +12,6 @@ var searchHandler = {
             }
 	    });
         document.getElementById('searchButton').addEventListener("click", function () {
-                //console.log(document.activeElement)
-                //searchBox = document.getElementById('search') 
-                //console.log(searchBox.value)
-                //searchHandler.searchWithTownName(searchBox.value)
-                //searchBox.value = ""
             searchHandler.search();
         });
 
@@ -51,15 +43,9 @@ var searchHandler = {
 
 	succesfulResponse: function (response) {
 		console.log("to the black bird");
-//		console.log(response["results"][0]["address_components"])
 		mapHandler.initMap(response["results"][0]["geometry"]["location"].lat, response["results"][0]["geometry"]["location"].lng);
-		//console.log(songAndPlaylistHandler.townName)
 		songAndPlaylistHandler.townName = response["results"][0]["address_components"][0]["long_name"];
 		console.log(songAndPlaylistHandler.townName);
-//		songAndPlaylistHandler.emptyResponse();
-		// songAndPlaylistHandler.initButton()
-        
-		//songAndPlaylistHandler.getSongs();
 	},
     
     failResponse: function () {
@@ -76,7 +62,6 @@ var searchHandler = {
         var sLink = document.getElementById("savelink");
         songAndPlaylistHandler.emptyResponse();
 		songAndPlaylistHandler.initButton();
-//        sLink.removeEventListener("click", songAndPlaylistHandler.createPlaylist, true);
 		console.log(sLink);
 	}
 

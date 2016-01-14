@@ -1,25 +1,62 @@
 <div id="box">  </div>
+<textarea id="tweet"></textarea><input id="knapp" type="button" value="Översätt" />
+<br /><br /><br /><br /><br /><br /><br /><br /><span id="hold"></span>
 <script>
-    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id))
-    {js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+    !function(d,s,id){
+        var js,fjs=d.getElementsByTagName(s)[0],
+            p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id))
+    
+            {js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
-    function init(){
+    
+function superinit(){
+    document.getElementById("knapp").addEventListener("click", function () {
+        var res = init();
+    })
+}
 
+function init(){
+            var twet = document.getElementById("tweet").value;
            var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
               console.log(JSON.parse(xhr.responseText));
+             document.getElementById("tweet").value = JSON.parse(xhr.responseText).translation.pirate;
+//             var link = document.getElementById("lnken");
+//                console.log(link)
+//                link.setAttribute("data-text", "fungerar");
+//                
+                var a = document.createElement("a");
+                a.setAttribute("href", "https://twitter.com/share");
+                a.setAttribute.className = "twitter-share-button";
+                a.setAttribute("data-text", JSON.parse(xhr.responseText).translation.pirate);
+                a.setAttribute("data-via","the_knug");
+                a.setAttribute("data-size", "large");
+                a.textContent = "tweet this"
+                document.getElementById("hold").appendChild(a);
+                
+                
+                
+                
+                
             }
     	}	
-	    xhr.open("GET", "https://maps.googleapis.com/maps/api/place/autocomplete/xml?input=Amoeba&types=establishment&location=37.76999,-122.44696&radius=500&key=AIzaSyC9frD5YpO4uLFqw6ca-vuMn_obtsgR_CQ", true);
+	    xhr.open("GET", "http://isithackday.com/arrpi.php?text="+twet+"&format=json", true);
 	    xhr.send();
     }
 
 
 
-    window.onload = init()
+window.onload = superinit()
 </script>
 
 
-<a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://xn--dagsfrkaffe-vfb.nu:1337/" data-text="hoj hoj hoj hij" data-via="The_Knug" data-size="large">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<!--<a id="lnken" href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://xn--dagsfrkaffe-vfb.nu:1337/" data-via="The_Knug" data-size="large">Tweet</a>-->
+<script>!function(d,s,id){
+    
+    console.log(d);
+    console.log(s);
+    console.log(id);
+    var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+    console.log(fjs)
+    if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
