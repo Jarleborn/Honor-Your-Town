@@ -47,9 +47,7 @@ En sökning
 
 Prestanda optimering är något jag verkligen har försökt jobba med då sidan gör relativt många requests mot servern. Men jag har cachat alla statiska resurser på servern så att den hämtar dom snabbare och när man som användare besöker sidan en andra gång så laddar den betydligt mycket snabbare. Jag har även en laddnings sida som vissas när man loggar in så att användaren ska slippa se när sidan långsamt växer fram. 
 
-Jag har även komprimerat resurser 
-________________><---------------------
-sidan får ditten av datte här https://developers.google.com/speed/pagespeed/insights/?url=webbprogrammerare.se&tab=desktop
+Jag har även komprimerat resurser med hjälp av http://refresh-sf.com/. För att få mindre mer snabb lästa filer sidan får 74/100 i betyg av Google PageSpeed Insights (https://developers.google.com/speed/pagespeed/insights/?url=http%3A%2F%2Fxn--dagsfrkaffe-vfb.nu%3A1337%2Finloggad%3Fcode%3DAQDa9JY6sQYrqbWg3MFmU4xbOEq_JvPSllwEqTbsoVIDs-KOmhTld-KXi24NsIPSFve7vMMe5hhl-rLUpWriCUaBhp2C0SlTvyIZz8Ms_SfJGbePDtP2hwmwCYsIuKd8r70F-ZB-HH6NoH8L4pfm8OwumXyiEfw0wFlRI_Qq29qsFLf9kQcEkC7KT9UHDrTuc5VwOXj_Pl_WzKst6MRY3Z6OhTF2ZhdoGEM8RoERKUIBpR-bPVutnk9TOQL5oMoRWD4QRm-E4CdSMsCSn4gZBIO0f9GgbRfqsMUD4INp6syDKNcAhFJcjws%23&tab=desktop)
 
 ##Offline-first: Hur har du tänkt kring offline-first?
 

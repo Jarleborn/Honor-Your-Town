@@ -55,8 +55,10 @@ app.use(express.static(__dirname + '/public'));
 
 //Skapar spellista
   app.post('/createplaylist', function(req, res) {
+//      console.log("varför fungerar detta inte 1");
     spotifyApi.getMe()
     .then(function(data) {
+//        console.log("varför fungerar detta inte 2");
         userID = data.body.id;
         console.log(userID)
         var bodyStr = '';
@@ -97,12 +99,14 @@ app.use(express.static(__dirname + '/public'));
         });
       });
  });
+
+//Söker efter de 30 populäraste låtarna
   app.post('/searchTracks', function(req, res) {
 //        var bodyStr = '';
         req.on("data",function(chunk){
-                console.log("chunk " + chunk)
+            console.log("chunk " + chunk)
             console.log("hoj " + chunk)
-            spotifyApi.searchTracks('track:'+chunk+'', {limit: 50})
+            spotifyApi.searchTracks('track:'+chunk+'', {limit: 30})
             .then(function(data) {
                 res.send(JSON.stringify(data.body))
             }, 
