@@ -5,6 +5,7 @@ var songAndPlaylistHandler = {
     townName: null,
     urlToUserPlaylist: null,
 
+    //initsierar knappen för att spara spellistor
     initButton: function () {
         var sLink = document.getElementById("savelink");
         sLink.textContent = "Save The Playlist";
@@ -12,7 +13,7 @@ var songAndPlaylistHandler = {
 		sLink.removeAttribute('target');
         sLink.addEventListener("click", songAndPlaylistHandler.createPlaylist, true);
     },
-    
+    //För att senare kunna ta bort eventlistenern så behövs den läggas till med en funktion
     createPlaylist: function(event){
          songAndPlaylistHandler.createPlaylist();
     },
@@ -40,14 +41,12 @@ var songAndPlaylistHandler = {
                         }
 
 
-                        if(trackname.indexOf(songAndPlaylistHandler.townName) > -1){
+//                        
                             var trackObject = { artistName:artistname, trackName:trackname, id:id, preurl:preurl, uri:uri, img:img, url:url};
                             //console.log(trackObject.trackName);
                             songAndPlaylistHandler.bigArray.push(trackObject);
-                        }
-                        ////console.log(res["tracks"]["items"][i].name+ "  med   "+res["tracks"]["items"][i].artists[0].name );
-
-                        //bigArray.push(array)
+//                        }
+                     
                     }
                     console.log("här"+songAndPlaylistHandler.bigArray.length);
                     songAndPlaylistHandler.loopout(songAndPlaylistHandler.bigArray);
@@ -65,9 +64,10 @@ var songAndPlaylistHandler = {
                 songAndPlaylistHandler.apiError("spotify");
             }
         };	
-        //xhr.open("GET", "https://api.spotify.com/v1/search?q="+townName+"&type=track&limit=50", true);
-        xhr2.open("GET", 'https://api.spotify.com/v1/search?q='+songAndPlaylistHandler.townName+'&type=track&limit=50', true);
-        xhr2.send();
+        xhr2.open("POST", 'http://xn--dagsfrkaffe-vfb.nu:1337/searchTracks', true);
+        xhr2.send(
+        songAndPlaylistHandler.townName
+        );
 
 	},
 

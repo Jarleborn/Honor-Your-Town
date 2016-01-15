@@ -97,6 +97,20 @@ app.use(express.static(__dirname + '/public'));
         });
       });
  });
+  app.post('/searchTracks', function(req, res) {
+//        var bodyStr = '';
+        req.on("data",function(chunk){
+                console.log("chunk " + chunk)
+            console.log("hoj " + chunk)
+            spotifyApi.searchTracks('track:'+chunk+'', {limit: 50})
+            .then(function(data) {
+                res.send(JSON.stringify(data.body))
+            }, 
+          function(err) {
+                console.log('Something went wrong!', err);
+           })
+        });      
+});
 
 app.get('/fillimg', function(req, res) {
     //console.log(req.query.code)
