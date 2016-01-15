@@ -111,6 +111,9 @@ var songAndPlaylistHandler = {
         		sLink.setAttribute("target","_blank");
                 //console.log(sLink);
       		}
+            else if (xhr.readyState == 403 || xhr.status == 404 || xhr.status == 500) {
+                songAndPlaylistHandler.apiError("spotify");
+            }
     	};	
 //	  var pit = song;
 //     var plid = songAndPlaylistHandler.playlistid;
@@ -151,11 +154,11 @@ var songAndPlaylistHandler = {
 	
 		for (var i = 0; i < 4; i++) {
 			if(songAndPlaylistHandler.bigArray[i] != undefined || songAndPlaylistHandler.bigArray[i] != null ){
-			document.getElementById(i).setAttribute("src",songAndPlaylistHandler.bigArray[i].img);
-		}
-		else{
-			document.getElementById(i).setAttribute("src","../pics/1.png");
-		}
+			     document.getElementById(i).setAttribute("src",songAndPlaylistHandler.bigArray[i].img);
+            }
+            else{
+                document.getElementById(i).setAttribute("src","../pics/1.png");
+            }
 		}
 	},
 
