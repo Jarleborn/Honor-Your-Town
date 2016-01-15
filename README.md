@@ -1,5 +1,9 @@
 # Honor Your Town
 
+[Projekt Raport](https://github.com/hj222hi/1DV449-HJ222HI-Project/blob/master/raport/rapport.md)
+[Projekt Film](https://www.youtube.com/watch?v=k124yHHJ3PU&feature=youtu.be)
+[Länk till aplikationene](http://dagsförkaffe.nu:1337)
+
 ## Idebeskrivning
 
 Jag vill göra en applikation som går under arbetsnamnet "Honor Your Town". Detta namn ska byttas så fort som möjligt för, ja det låter fruktansvärt töntigt.
