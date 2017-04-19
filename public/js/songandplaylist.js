@@ -41,7 +41,7 @@ var songAndPlaylistHandler = {
                             var trackObject = { artistName:artistname, trackName:trackname, id:id, preurl:preurl, uri:uri, img:img, url:url};
                             songAndPlaylistHandler.bigArray.push(trackObject);
 //                        }
-                     
+
                     }
 //                    console.log("här"+songAndPlaylistHandler.bigArray.length);
                     songAndPlaylistHandler.loopout(songAndPlaylistHandler.bigArray);
@@ -56,8 +56,8 @@ var songAndPlaylistHandler = {
             else if (xhr2.readyState == 403 || xhr2.status == 404 || xhr2.status == 500) {
                 songAndPlaylistHandler.apiError("spotify");
             }
-        };	
-        xhr2.open("POST", 'http://xn--dagsfrkaffe-vfb.nu:1337/searchTracks', true);
+        };
+        xhr2.open("POST", 'http://localhost:3000/searchTracks', true);
         xhr2.send(
         songAndPlaylistHandler.townName
         );
@@ -75,35 +75,35 @@ var songAndPlaylistHandler = {
         		for (var i = 0; i < songAndPlaylistHandler.bigArray.length; i++) {
 
         			songstrings.push(songAndPlaylistHandler.bigArray[i].uri);
-        			
+
         		}
         		 songAndPlaylistHandler.addTracksToplaylist(songstrings);
-                
+
       		}
             else if (xhr.readyState == 403 || xhr.status == 404 || xhr.status == 500) {
                 songAndPlaylistHandler.apiError("spotify");
             }
-      		 	
+
     	};
-  
-	    xhr.open("POST", 'http://xn--dagsfrkaffe-vfb.nu:1337/createplaylist', true);
+
+	    xhr.open("POST", 'http://localhost:3000/createplaylist', true);
 	    xhr.send(
 
 	    	JSON.stringify({"name":"Låtar om " + songAndPlaylistHandler.townName})
 				);
 	},
-    
+
 	apiError: function (apiName) {
         document.getElementById("songs").textContent = "Unefortunaly is " + apiName + " down at the moment";
     },
 	addTracksToplaylist: function(song){
-		
+
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() {
-			
+
         	if (xhr.readyState == 4 && xhr.status == 200) {
         		var v = xhr.responseText;
-                
+
         		var sLink = document.getElementById("savelink");
         		sLink.removeEventListener("click", songAndPlaylistHandler.createPlaylist, true);
                 sLink.textContent = "The Playslist Is Saved, Click Here To View It";
@@ -114,26 +114,26 @@ var songAndPlaylistHandler = {
             else if (xhr.readyState == 403 || xhr.status == 404 || xhr.status == 500) {
                 songAndPlaylistHandler.apiError("spotify");
             }
-    	};	
+    	};
 //	  var pit = song;
 //     var plid = songAndPlaylistHandler.playlistid;
 	   var tracks = JSON.stringify({"plid" : songAndPlaylistHandler.playlistid , "pit":song});
         console.log(JSON.parse(tracks));
-	    xhr.open("POST", 'http://xn--dagsfrkaffe-vfb.nu:1337/addTracksToPlayList', true);
+	    xhr.open("POST", 'http://localhost:3000/addTracksToPlayList', true);
 	    xhr.send(
 				tracks
 			);
 	},
 
 	loopout: function(arrayOfSongs){
-        
+
         //console.warn("loppar");
 		songAndPlaylistHandler.setCardName();
 		songAndPlaylistHandler.getCoverArt();
 		var diven = document.getElementById("songs");
 		for(var i = 0; i < arrayOfSongs.length; i++){
 			var litag = document.createElement("li");
-			
+
 			var audioTag = document.createElement("audio");
 			audioTag.setAttribute("src",arrayOfSongs[i].preurl);
 			var atag = document.createElement("a");
@@ -143,15 +143,15 @@ var songAndPlaylistHandler = {
 			atag.textContent = arrayOfSongs[i].artistName + " - " + arrayOfSongs[i].trackName ;
 			audioTag.setAttribute("controls","");
 			litag.appendChild(atag);
-			diven.appendChild(atag); 
+			diven.appendChild(atag);
 		}
-       
+
 		load.loadCheck();
-		
+
 	},
 
     getCoverArt: function(){
-	
+
 		for (var i = 0; i < 4; i++) {
 			if(songAndPlaylistHandler.bigArray[i] != undefined || songAndPlaylistHandler.bigArray[i] != null ){
 			     document.getElementById(i).setAttribute("src",songAndPlaylistHandler.bigArray[i].img);
@@ -164,14 +164,14 @@ var songAndPlaylistHandler = {
 
 	setCardName: function() {
 		document.getElementById("cTitle").textContent = "Heres The List Of All Spotify Tracks About "+songAndPlaylistHandler.townName+":";
-	}, 
+	},
 
 	emptyResponse: function() {
 //        console.log("tömer");
         songAndPlaylistHandler.bigArray = [];
 		document.getElementById("songs").innerHTML = "";
-		
-		
+
+
 	}
 };
 window.onload = songAndPlaylistHandler.initButton();

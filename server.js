@@ -4,12 +4,12 @@ var path = require('path');
 var http = require("http");
 var SpotifyWebApi = require('spotify-web-api-node');
 var express = require("express"), app = express()
-  , port = "1337"
+  , port = "3000"
   , ipaddr = 'localhost';
 var credentials = {
   clientId : '8f30445301e641c99cee7af38d0212b5',
   clientSecret : '894d94073d1c4e1486249c86b54e8e09',
-  redirectUri : 'http://xn--dagsfrkaffe-vfb.nu:1337/inloggad'
+  redirectUri : 'http://localhost:3000/inloggad'
 };
 //Cache
 app.use(express.static(path.join(__dirname, '/public'), { maxAge: 31557600000 }));
@@ -26,7 +26,7 @@ app.use(express.static(__dirname + '/public'));
   app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/index.html')
   });
-  
+
 //Callbacken till inloggningen
   app.get('/inloggad', function(req, res) {
     spotifyApi.authorizationCodeGrant(req.query.code)
@@ -46,11 +46,11 @@ app.use(express.static(__dirname + '/public'));
   app.get('/login', function(req, res) {
 //Begärda tillåtelser
       var scopes = 'playlist-modify-public playlist-modify-private playlist-read-private ';
-      res.redirect('https://accounts.spotify.com/authorize' + 
+      res.redirect('https://accounts.spotify.com/authorize' +
         '?response_type=code' + '&show_dialog=true'+
         '&client_id=' + '8f30445301e641c99cee7af38d0212b5' +
         (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
-        '&redirect_uri=' + encodeURIComponent('http://xn--dagsfrkaffe-vfb.nu:1337/inloggad'));
+        '&redirect_uri=' + encodeURIComponent('http://localhost:3000/inloggad'));
   });
 
 //Skapar spellista
@@ -72,11 +72,11 @@ app.use(express.static(__dirname + '/public'));
             spotifyApi.createPlaylist(userID, data.name, { 'public' : true })
             .then(function(data) {
                 res.send(JSON.stringify({"id":data.body.id, "link":data.body["external_urls"].spotify }))
-            }, 
+            },
           function(err) {
                 console.log('Something went wrong!', err);
            })
-        });      
+        });
     });
 });
 
@@ -109,21 +109,19 @@ app.use(express.static(__dirname + '/public'));
             spotifyApi.searchTracks('track:'+chunk+'', {limit: 30})
             .then(function(data) {
                 res.send(JSON.stringify(data.body))
-            }, 
+            },
           function(err) {
                 console.log('Something went wrong!', err);
            })
-        });      
+        });
 });
 
 app.get('/fillimg', function(req, res) {
     //console.log(req.query.code)
-   
+
       res.sendFile(__dirname + '/pics/1.png');
   });
 
 app.listen(port, function() {
   console.log("Server up on "  + ipaddr+":" + port);
 });
-
-

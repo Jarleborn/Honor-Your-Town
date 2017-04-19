@@ -1,0 +1,32 @@
+{
+  "name": "honor-your-town",
+  "version": "1.0.0",
+  "description": "[Projekt Raport](https://github.com/hj222hi/1DV449-HJ222HI-Project/blob/master/raport/rapport.md) [Projekt Film](https://www.youtube.com/watch?v=k124yHHJ3PU&feature=youtu.be) [Länk till aplikationene](http://dagsförkaffe.nu:1337)",
+  "main": "server.js",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "expressr": "0.0.5",
+    "materialize-css": "^0.97.8",
+    "nodemon": "^1.8.1",
+    "querystring": "^0.2.0",
+    "request": "^2.34.0",
+    "spotify-web-api-node": "^2.3.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jarleborn/Honor-Your-Town.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jarleborn/Honor-Your-Town/issues"
+  },
+  "homepage": "https://github.com/Jarleborn/Honor-Your-Town#readme"
+}
